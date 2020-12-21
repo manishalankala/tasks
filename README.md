@@ -124,3 +124,19 @@ open a web browser and navigate to http://your_external_ip:30000
 kubectl get pods -n ingress-nginx
 
 kubectl get svc
+
+
+ingress.yaml
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: jenkins
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: jenkins
+          servicePort: 8080
