@@ -1,6 +1,22 @@
 # dectask1
 
 
+
+
+
+Please describe in as much detail as you can the process of *one* out of the two scenarios:
+
+A user has written a YAML file containing a Kubernetes `Deployment` resource containing the following resources:
+- a Kubernetes `Service` resource making the deployment to get exposed
+- a kubernetes `ingress` resource linking to the deployment
+- a kubernetes `secret` resource referenced in deployment.
+
+What happens underneath on the local machine, within the cluster and on the network?
+
+
+
+
+
 mkdir ~/.kube
 
 kubectl version
