@@ -234,6 +234,36 @@ kubectl get secret mariadb-root-password -o jsonpath='{.data.password}' | base64
 
 
 
+or 
+
+kubectl create secret generic registrykeygeneric --from-literal=username=jenkins --from-literal=password=ryd$@!!!!ryd
+
+
+we can add this in deployment.yaml
+
+```
+        env:
+        - name: REGISTRY_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: registrykeygeneric
+              key: username
+        - name: REGISTRY_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: registrykeygeneric
+              key: password
+
+
+
+```
+
+
+
+
+
+
+
 if setup is done on AWS or Azure
 
 
