@@ -267,3 +267,33 @@ spec:
 ```
 
 
+
+
+
+Alternative usecase on prometheus
+
+
+service.yaml
+
+```
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: prometheus
+  name: prometheus
+spec:
+  ports:
+  - port: 81
+    targetPort: 9090
+    nodePort: 30100
+  selector:
+    app: prometheus
+  type: NodePort
+
+
+```
+
+
+
+http://prometheusurl:30100
