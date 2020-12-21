@@ -38,3 +38,26 @@ spec:
           value: Deployed successfully
 
 ```
+
+
+Service.yaml
+
+```
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: monitor
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 9090
+  selector:
+    app: monitor
+
+
+
+
+```
