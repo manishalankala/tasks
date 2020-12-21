@@ -14,7 +14,7 @@ A user has written a YAML file containing a Kubernetes `Deployment` resource con
 What happens underneath on the local machine, within the cluster and on the network?
 
 
-
+---------------------------------------------------------------------------------------------------------------------
 
 
 mkdir ~/.kube
