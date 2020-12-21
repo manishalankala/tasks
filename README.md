@@ -221,3 +221,29 @@ kubectl apply -f jenkins-secrets.yaml
 kubectl get secret jenkins-root-password -o jsonpath='{.data.password}'
 
 kubectl get secret mariadb-root-password -o jsonpath='{.data.password}' | base64 --decode
+
+
+
+
+if setup is done on AWS or Azure
+
+add this in deployment.yaml
+
+
+
+```
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jenkinsdata
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: gp2 
+  resources:
+    requests:
+      storage: 50Gi
+
+
+```
+
