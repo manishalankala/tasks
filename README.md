@@ -33,7 +33,8 @@ spec:
         image: grafana/grafana:latest
         ports:
         - containerPort: 3000
-
-
+        env:
+        - name: MESSAGE
+          value: Deployed successfully
 
 ```
