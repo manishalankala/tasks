@@ -127,6 +127,8 @@ spec:
 
 ```
 
+Note : selector type can be ClusterIp or Nodeport
+
 service2.yaml
 
 ```
@@ -144,6 +146,9 @@ spec:
   type: ClusterIP
 
 ```
+
+Note : selector type can be ClusterIp or Nodeport
+
 
 kubectl create -f service1.yaml --namespace jenkinsprod  or kubectl apply -f service1.yaml
 
