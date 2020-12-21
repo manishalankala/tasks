@@ -1,6 +1,10 @@
 # dectask1
 
 
+mkdir ~/.kube
+
+kubectl version
+
 kubectl create namespace jenkinsprod
 
 A deployment is responsible for keeping a set of pods running
@@ -32,6 +36,15 @@ spec:
             containerPort: 8080
           - name: jnlp-port
             containerPort: 50000
+	env:
+       - name: JENKINS_ROOT_PASSWORD
+         valueFrom:
+           secretKeyRef:
+             name: jenkins-root-password
+             key: ryd$@!!!!ryd
+        envFrom:
+        - secretRef:
+            name: jenkins-user-credentials
         volumeMounts:
           - name: jenkinsdata
             mountPath: /var/jenkinsdata
