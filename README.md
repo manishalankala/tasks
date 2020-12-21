@@ -96,9 +96,9 @@ spec:
 
 ```
 
-kubectl create -f service1.yaml --namespace jenkinsprod
+kubectl create -f service1.yaml --namespace jenkinsprod  or kubectl apply -f service1.yaml
 
-kubectl create -f service2.yaml --namespace jenkinsprod
+kubectl create -f service2.yaml --namespace jenkinsprod  or kubectl apply -f service2.yaml
 
 kubectl get services --namespace jenkinsprod
 
