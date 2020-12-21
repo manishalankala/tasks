@@ -1,12 +1,7 @@
 # dectask1
 
 
-
-
-
 kubectl create namespace jenkinsprod
-
-
 
 A deployment is responsible for keeping a set of pods running
 
