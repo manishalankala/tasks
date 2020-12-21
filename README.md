@@ -151,7 +151,7 @@ spec:
   rules:
   - http:
       paths:
-      - path: /
+      - path: /data
         backend:
           serviceName: jenkins-service
           servicePort: 8080
