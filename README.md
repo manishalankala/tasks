@@ -89,6 +89,10 @@ A service is responsible for enabling network access to a set of pods
 
  create ingress rules that expose your deployment to the external world
  
+ 
+ 
+ 
+ 
  kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/mandatory.yaml
  
  kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/cloud-generic.yaml
@@ -155,6 +159,11 @@ kubectl get pods -n ingress-nginx
 kubectl get svc
 
 
+
+To install the Nginx Ingress Controller
+
+helm install nginx-ingress stable/nginx-ingress --set controller.publishService.enabled=true
+
 ingress.yaml
 
 ```
@@ -181,7 +190,10 @@ spec:
 
 kubectl apply -f ingress.yaml
 
-kubectl get svc -n ingress-nginx ingress-nginx -o=jsonpath='{.status.loadBalancer.ingress[0].ip}'
+kubectl get svc -n ingress-nginx ingress-nginx -o=jsonpath='{.status.loadBalancer.ingress[0].ip}' or kubectl get services -o wide -w nginx-ingress-controller
+
+
+
 
 
 jenkins-secrets.yaml
