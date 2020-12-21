@@ -129,6 +129,8 @@ spec:
 
 Note : selector type can be ClusterIp or Nodeport
 
+then access via http://jenkinsurl:30000
+
 service2.yaml
 
 ```
