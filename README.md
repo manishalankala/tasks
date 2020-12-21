@@ -102,6 +102,10 @@ kubectl create -f service2.yaml --namespace jenkinsprod  or kubectl apply -f ser
 
 kubectl get services --namespace jenkinsprod
 
+kubectl get service 
+
+kubectl get service jenkins
+
 kubectl get nodes -o wide
 
 open a web browser and navigate to http://your_external_ip:30000
