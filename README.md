@@ -155,6 +155,10 @@ spec:
         backend:
           serviceName: jenkins-service
           servicePort: 8080
+      - path: /data
+        backend:
+          serviceName: jenkins-service-jnlp
+          servicePort: 50000
 	  
 ```
 
