@@ -227,7 +227,15 @@ kubectl get secret mariadb-root-password -o jsonpath='{.data.password}' | base64
 
 if setup is done on AWS or Azure
 
-add this in deployment.yaml
+
+```
+      volumes:
+        persistentVolumeClaim:
+        claimName: jenkinsdata
+
+```
+
+add this in pvc.yaml
 
 
 
@@ -246,4 +254,5 @@ spec:
 
 
 ```
+
 
