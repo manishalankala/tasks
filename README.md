@@ -71,6 +71,7 @@ spec:
       nodePort: 30000
   selector:
     app: jenkins
+  type: ClusterIP
 
 ```
 
@@ -88,6 +89,7 @@ spec:
       targetPort: 50000
   selector:
     app: jenkins
+  type: ClusterIP
 
 ```
 
