@@ -53,6 +53,8 @@ spec:
             containerPort: 8080
           - name: jnlp-port-hooks
             containerPort: 50000
+      imagePullSecrets:
+      - name: registrykey
 	env:
        - name: JENKINS_ROOT_PASSWORD
          valueFrom:
@@ -115,12 +117,14 @@ apiVersion: v1
 kind: Service
 metadata:
   name: jenkins-service
+  labels:
+    name: jenkins-service
 spec:
   type: NodePort
   ports:
     - port: 8080
       targetPort: 8080
-      nodePort: 30000
+      nodePort: 30080
   selector:
     app: jenkins-deployment
   type: ClusterIP
@@ -138,6 +142,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: jenkins-service-jnlp
+  labels:
+    name: jenkins-service-jnlp
 spec:
   type: ClusterIP
   ports:
@@ -149,7 +155,9 @@ spec:
 
 ```
 
-Note : selector type can be ClusterIp or Nodeport
+Note : selector type can be  Nodeport othe than ClusterIp
+
+then in spec remove type just mention port,targetport,nodeport
 
 
 kubectl create -f service1.yaml --namespace jenkinsprod  or kubectl apply -f service1.yaml
