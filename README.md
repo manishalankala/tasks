@@ -168,7 +168,7 @@ kubectl apply -f ingress.yaml
 kubectl get svc -n ingress-nginx ingress-nginx -o=jsonpath='{.status.loadBalancer.ingress[0].ip}'
 
 
-secrets.yaml
+jenkins-secrets.yaml
 
 ```
 apiVersion: v1
@@ -181,6 +181,8 @@ data:
   
 ```
 
+
+kubectl apply -f jenkins-secrets.yaml
 
 kubectl get secret jenkins-root-password -o jsonpath='{.data.password}'
 
