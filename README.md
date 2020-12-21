@@ -180,3 +180,6 @@ data:
   password: ryd$@!!!!ryd
   
 ```
+
+
+kubectl get secret jenkins-root-password -o jsonpath='{.data.password}'
