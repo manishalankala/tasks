@@ -270,7 +270,7 @@ spec:
 
 
 
-Alternative usecase on prometheus
+### Alternative usecase on prometheus
 
 
 service.yaml
