@@ -228,6 +228,8 @@ kubectl get secret mariadb-root-password -o jsonpath='{.data.password}' | base64
 if setup is done on AWS or Azure
 
 
+add this
+
 ```
       volumes:
         persistentVolumeClaim:
@@ -235,7 +237,7 @@ if setup is done on AWS or Azure
 
 ```
 
-add this in pvc.yaml
+create & apply pvc.yaml
 
 
 
