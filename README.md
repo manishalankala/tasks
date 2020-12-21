@@ -193,7 +193,9 @@ kubectl apply -f ingress.yaml
 kubectl get svc -n ingress-nginx ingress-nginx -o=jsonpath='{.status.loadBalancer.ingress[0].ip}' or kubectl get services -o wide -w nginx-ingress-controller
 
 
+Note : 
 
+Under rules we can add host: domain name or the url
 
 
 jenkins-secrets.yaml
