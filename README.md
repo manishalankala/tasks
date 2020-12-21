@@ -127,7 +127,7 @@ spec:
       nodePort: 30080
   selector:
     app: jenkins-deployment
-  type: ClusterIP
+  type: ClusterIP or Nodeport
 
 ```
 
@@ -149,15 +149,16 @@ spec:
   ports:
     - port: 50000
       targetPort: 50000
+      nodeport: 50080   
   selector:
     app: jenkins-deployment
-  type: ClusterIP
+  type: ClusterIP or Nodeport
 
 ```
 
 Note : selector type can be  Nodeport othe than ClusterIp
 
-then in spec remove type just mention port,targetport,nodeport
+then in spec remove type just mention port,targetport,nodeport only mention slector type as Nodeport
 
 
 kubectl create -f service1.yaml --namespace jenkinsprod  or kubectl apply -f service1.yaml
