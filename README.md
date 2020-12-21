@@ -133,7 +133,7 @@ spec:
 
 Note : selector type can be ClusterIp or Nodeport
 
-then access via http://jenkinsurl:30000
+then access via http://jenkinsurl:30080/jenkins-service
 
 service2.yaml
 
@@ -155,6 +155,9 @@ spec:
   type: ClusterIP or Nodeport
 
 ```
+
+
+http://jenkinsurl:50080/jenkins-service-jnlp
 
 Note : selector type can be  Nodeport othe than ClusterIp
 
