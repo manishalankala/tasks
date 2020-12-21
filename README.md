@@ -183,3 +183,5 @@ data:
 
 
 kubectl get secret jenkins-root-password -o jsonpath='{.data.password}'
+
+kubectl get secret mariadb-root-password -o jsonpath='{.data.password}' | base64 --decode
