@@ -273,6 +273,47 @@ spec:
 ### Alternative usecase on prometheus
 
 
+deployment.yaml
+
+
+```
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-server
+spec:
+  replicas: 1
+  template:
+    spec:
+      serviceAccountName: prometheus-server
+      containers:
+        - name: prometheus
+          image: prom/prometheus
+          args:
+            - "--config.file=/etc/prometheus/prometheus.yaml"
+            - "--storage.tsdb.path=/prometheus/"
+          ports:
+            - containerPort: 9090
+          volumeMounts:
+            - name: prometheus-config-volume
+              mountPath: /etc/prometheus/
+            - name: prometheus-storage-volume
+              mountPath: /prometheus/
+      volumes:
+        - name: prometheus-config-volume
+          configMap:
+            name: prometheus-configuration
+        - name: prometheus-storage-volume
+          emptyDir: {}
+
+
+
+```
+
+
+
+
 service.yaml
 
 ```
@@ -284,7 +325,7 @@ metadata:
   name: prometheus
 spec:
   ports:
-  - port: 81
+  - port: 9090
     targetPort: 9090
     nodePort: 30100
   selector:
