@@ -47,6 +47,7 @@ spec:
       containers:
       - name: jenkins
         image: jenkins/jenkins:lts
+	imagePullPolicy: "Always"
         ports:
           - name: http-port
             containerPort: 8080
@@ -67,8 +68,9 @@ spec:
 	  - name: jenkinsdata
 	    mountPath: /data/jenkinsdata
       volumes:
-        - name: jenkinsdata
-          emptyDir: {}	  
+        - name: jenkinsconfigdata
+          emptyDir: {}
+	- name: jenkinsdata
 	env:
         - name: MESSAGE
           value: Deployed successfully
