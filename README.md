@@ -62,8 +62,10 @@ spec:
         - secretRef:
             name: jenkins-user-credentials
         volumeMounts:
-          - name: jenkinsdata
+          - name: jenkinsconfigdata
             mountPath: /var/jenkinsdata
+	  - name: jenkinsdata
+	    mountPath: /data/jenkinsdata
       volumes:
         - name: jenkinsdata
           emptyDir: {}	  
