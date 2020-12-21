@@ -49,9 +49,9 @@ spec:
         image: jenkins/jenkins:lts
 	imagePullPolicy: "Always"
         ports:
-          - name: http-port
+          - name: http-port-ui
             containerPort: 8080
-          - name: jnlp-port
+          - name: jnlp-port-hooks
             containerPort: 50000
 	env:
        - name: JENKINS_ROOT_PASSWORD
@@ -67,6 +67,8 @@ spec:
             mountPath: /var/jenkinsdata
 	  - name: jenkinsdata
 	    mountPath: /data/jenkinsdata
+	  - name: docker-socket
+	   mountPath: /var/run/docker.sock
       volumes:
         - name: jenkinsconfigdata
           emptyDir: {}
