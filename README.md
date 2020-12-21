@@ -13,16 +13,16 @@ deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: jenkins
+  name: jenkins-deployment
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: jenkins
+      app: jenkins-deploymment
   template:
     metadata:
       labels:
-        app: jenkins
+        app: jenkins-deployment
     spec:
       containers:
       - name: jenkins
@@ -75,7 +75,7 @@ service1.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: jenkins
+  name: jenkins-service
 spec:
   type: NodePort
   ports:
@@ -83,7 +83,7 @@ spec:
       targetPort: 8080
       nodePort: 30000
   selector:
-    app: jenkins
+    app: jenkins-deployment
   type: ClusterIP
 
 ```
@@ -94,14 +94,14 @@ service2.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: jenkins-jnlp
+  name: jenkins-service-jnlp
 spec:
   type: ClusterIP
   ports:
     - port: 50000
       targetPort: 50000
   selector:
-    app: jenkins
+    app: jenkins-deployment
   type: ClusterIP
 
 ```
@@ -131,12 +131,14 @@ ingress.yaml
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: jenkins
+  name: jenkins-ingress
 spec:
   rules:
   - http:
       paths:
       - path: /
         backend:
-          serviceName: jenkins
+          serviceName: jenkins-service
           servicePort: 8080
+	  
+kubectl apply -f ingress.yaml
