@@ -128,6 +128,8 @@ kubectl get svc
 
 ingress.yaml
 
+```
+
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -141,4 +143,9 @@ spec:
           serviceName: jenkins-service
           servicePort: 8080
 	  
+```
+
+
 kubectl apply -f ingress.yaml
+
+kubectl get svc -n ingress-nginx ingress-nginx -o=jsonpath='{.status.loadBalancer.ingress[0].ip}'
