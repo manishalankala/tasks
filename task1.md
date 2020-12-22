@@ -131,7 +131,7 @@ spec:
       nodePort: 30080
   selector:
     app: jenkins-deployment
-  type: ClusterIP or Nodeport
+  type: Nodeport
 
 ```
 
@@ -198,7 +198,7 @@ spec:
       nodeport: 50080   
   selector:
     app: jenkins-deployment
-  type: ClusterIP or Nodeport
+  type: Nodeport
 
 ```
 
