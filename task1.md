@@ -110,6 +110,10 @@ Kubernetes ingress is an "object that manages external access to services in a c
 Ingress exposes HTTP and HTTPS routes from outside the cluster to services within the cluster. Traffic routing is controlled by rules defined on the Ingress resource.
 
 
+If you want session affinity on pod-to-service routing, you can set the SessionAffinity: ClusterIP field on a Service object
+
+
+
 service1.yaml
 
 ```
@@ -134,6 +138,48 @@ spec:
 Note : selector type can be ClusterIp or Nodeport
 
 then access via http://jenkinsurl:30080/jenkins-service
+
+
+
+Alternative way for service.yaml
+
+
+```
+kind: Service
+apiVersion: v1
+metadata:
+  name: jenkins-service
+spec:
+  selector:
+    app: jenkins-deployment
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+      nodePort: 30080
+  clusterIP: 10.0.171.200
+  loadBalancerIP: 192.162.24.1
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+      - ip: 146.143.45.160
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 service2.yaml
 
@@ -393,7 +439,9 @@ Kubernetes manages networking through CNI’s on top of docker
 
 Container Networking Interface - defined interface that can be called by kubernetes to execute actions to provide networking functionality.
 
-k8s does not use docker0
+CNI - Flannel I choose
+
+k8s does not use docker0(172.0.0.0)
 
 
 Docker ---- uses Overlay networks such as vxlan or ipsec
