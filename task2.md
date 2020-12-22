@@ -209,7 +209,7 @@ resource "kubernetes_persistent_volume_claim" "prom_pvc" {
     access_modes = ["ReadWriteMany"]
     resources {
       requests = {
-        storage = "5Gi"
+        storage = "20Gi"
       }
     }
   }
