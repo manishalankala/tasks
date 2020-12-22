@@ -387,6 +387,19 @@ http://prometheusurl:30100
 ## What happens underneath on the local machine, within the cluster and on the network?
 
 
+
+
+Kubernetes manages networking through CNI’s on top of docker 
+
+Container Networking Interface - defined interface that can be called by kubernetes to execute actions to provide networking functionality.
+
+k8s does not use docker0
+
+
+Docker ---- uses Overlay networks such as vxlan or ipsec
+
+
+
 Each Service has a setting called ServiceType that defines how that service is exposed. 
 You can set this to ClusterIP, NodePort, LoadBalancer, or ExternalName depending on your particular deployment scenario
 
