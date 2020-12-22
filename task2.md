@@ -21,6 +21,8 @@ Please provide Terraform code to deploy Prometheus server on AWS.
 
 6.prometheusk8s.tf
 
+7.deployment.yaml
+
 
 
 
@@ -334,6 +336,63 @@ depends_on = [
     type = "LoadBalancer"
   }
 }
+
+
+
+
+
+```
+
+
+
+
+
+deployment.yaml
+
+```
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: kube-state-metrics
+    app.kubernetes.io/version: v1.8.0
+  name: kube-state-metrics
+  namespace: kube-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: kube-state-metrics
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: kube-state-metrics
+        app.kubernetes.io/version: v1.8.0
+    spec:
+      containers:
+      - image: quay.io/coreos/kube-state-metrics:v1.8.0
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+        name: kube-state-metrics
+        ports:
+        - containerPort: 8080
+          name: http-metrics
+        - containerPort: 8081
+          name: telemetry
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8081
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+      nodeSelector:
+        kubernetes.io/os: linux
+      serviceAccountName: kube-state-metrics
 
 
 
