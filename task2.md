@@ -15,6 +15,7 @@ Please provide Terraform code to deploy Prometheus server on AWS.
 
 4.storage_rbac.tf
 
+5.efs_provision.tf
 
 
 
@@ -109,6 +110,8 @@ resource "kubernetes_cluster_role_binding" "tf_efs_role_binding" {
 ```
 
 
+
+efs_provision.tf
 
 ```
 
