@@ -237,10 +237,10 @@ data = {
         - targets: ['localhost:9090']
       - job_name: 'node1'
         static_configs:
-        - targets: ['192.168.0.107:9100']
+        - targets: ['192.169.0.101:9100']
       - job_name: 'apache'
         static_configs:
-        - targets: ['192.168.99.101:9117']
+        - targets: ['192.169.99.101:9117']
       - job_name: 'kube-state-metrics'
         static_configs:
         - targets: ['kube-state-metrics.kube-system.svc.cluster.local:8080']
