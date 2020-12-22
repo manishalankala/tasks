@@ -481,3 +481,8 @@ Node01 -----> eth0 -----> cbr0 -----> veth0 -----> pod -----> container
 Each pod’s network namespace communicates with the node’s root netns through a virtual ethernet pipe. On the node side, this pipe appears as a device that typically begins with veth and ends in a unique identifier.
 
 kube-proxy can configure IPVS to handle the translation of virtual Service IPs to pod IPs
+
+
+## References 
+
+https://sookocheff.com/post/kubernetes/understanding-kubernetes-networking-model/
