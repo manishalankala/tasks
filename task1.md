@@ -331,8 +331,11 @@ add this
       volumes:
         persistentVolumeClaim:
         claimName: jenkinsdata
-
+	Persistence:
+          StorageClass: efs
 ```
+
+
 
 create & apply pvc.yaml
 
