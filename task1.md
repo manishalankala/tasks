@@ -380,3 +380,34 @@ spec:
 
 
 http://prometheusurl:30100
+
+
+
+
+## What happens underneath on the local machine, within the cluster and on the network?
+
+
+Each Service has a setting called ServiceType that defines how that service is exposed. 
+You can set this to ClusterIP, NodePort, LoadBalancer, or ExternalName depending on your particular deployment scenario
+
+
+ClusterIP :
+
+ClusterIP is the default ServiceType and it creates a single IP address that can be used to access its Pods which can only be accessed from inside the cluster. If KubeDNS is enabled it will also get a series of DNS records assigned to it include an A record to match its IP. This is very useful for exposing microservices running inside the same Kubernetes cluster to each other.
+
+
+Want applications in the same Kubernetes cluster to talk to each other ------> then you would use ClusterIP as there is no need to expose it to the outside world
+
+
+
+Nodeport:
+
+NodePort builds on top of ClusterIP to create a mapping from each Worker Node’s static IP on a specified (or Kubernetes chosen) Port. A Service exposed as a NodePort can be accessed via <node-ip-address>:<node-port>. This ServiceType can be useful when developing applications with minikube or for exposing a specific Port to an application via an unmanaged load balancer or round robin DNS.
+	
+	
+Do not have a supported Load Balancer  ------> then  should look at NodePort
+	
+	
+LoadBalancer:
+
+LoadBalancer builds on top of NodePort and is used to automatically configure a supported external Load Balancer (for instance an ELB in Amazon) to route traffic through to the NodePort of the Service. This is the most versatile of the ServiceTypes but requires that you have a supported Load Balancer in your infrastructure of which most major cloud providers have.
