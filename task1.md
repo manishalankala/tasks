@@ -141,7 +141,7 @@ then access via http://jenkinsurl:30080/jenkins-service
 
 
 
-Alternative way for service.yaml
+Alternative way for service1.yaml
 
 
 ```
