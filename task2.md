@@ -21,8 +21,13 @@ Please provide Terraform code to deploy Prometheus server on AWS.
 
 6.prometheusk8s.tf
 
-7.deployment.yaml
+7.deployment.yaml (prometheus)
 
+8.service.yaml (prometheus)
+
+9.deployment.yaml (prometheus)
+
+10.service.yaml (prometheus)
 
 
 
