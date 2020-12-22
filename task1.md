@@ -472,3 +472,12 @@ Do not have a supported Load Balancer  ------> then  should look at NodePort
 LoadBalancer:
 
 LoadBalancer builds on top of NodePort and is used to automatically configure a supported external Load Balancer (for instance an ELB in Amazon) to route traffic through to the NodePort of the Service. This is the most versatile of the ServiceTypes but requires that you have a supported Load Balancer in your infrastructure of which most major cloud providers have.
+
+
+
+
+Node01 -----> eth0 -----> cbr0 -----> veth0 -----> pod -----> container
+
+Each pod’s network namespace communicates with the node’s root netns through a virtual ethernet pipe. On the node side, this pipe appears as a device that typically begins with veth and ends in a unique identifier.
+
+kube-proxy can configure IPVS to handle the translation of virtual Service IPs to pod IPs
