@@ -187,7 +187,7 @@ resource "kubernetes_deployment" "tf-efs-provisioner" {
 
 
 
-
+prometheusk8s.tf
 
 ```
 
