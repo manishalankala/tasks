@@ -8,9 +8,22 @@ Please provide Terraform code to deploy Prometheus server on AWS.
 
 
 1.versions.tf
+
 2.providers.tf
+
 3.storage_class.tf
+
 4.storage_rbac.tf
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------
 
 versions.tf
 
