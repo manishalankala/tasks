@@ -50,4 +50,11 @@ The command ssh-copy-id will copy the control node's public key to the authorize
 
 On control node
 
-$ sudo yum install ansible  - RHEL
+
+sudo yum install python3
+
+sudo yum update python3
+
+python3 -V
+
+sudo yum install ansible  - RHEL
