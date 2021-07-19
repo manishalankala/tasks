@@ -44,4 +44,6 @@ ssh-copy-id publiccloudvm@PUBLICIPADDRESS
 
 #### sshd_config file and disable the password authentication
 
+The command ssh-copy-id will copy the control node's public key to the authorized_keys file on the managed nodes
+
 ~~~
