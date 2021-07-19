@@ -47,3 +47,7 @@ ssh-copy-id publiccloudvm@PUBLICIPADDRESS
 The command ssh-copy-id will copy the control node's public key to the authorized_keys file on the managed nodes
 
 ~~~
+
+On control node
+
+$ sudo yum install ansible  - RHEL
