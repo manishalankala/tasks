@@ -40,6 +40,9 @@
           ELASTICSEARCH_HOSTS: http://{{ elastic_container}}:9200"
           ELASTICSEARCH_USERNAME: "kibana"
           ELASTICSEARCH_PASSWORD: "DSEwW$*]_5P3m-}@Hqb@"
+        ports:
+        - "5601:5601"
+        network_mode: bridge
         log_driver:
         log_options: 
           max-size: "50m"
