@@ -21,6 +21,10 @@
           xpack.monitoring.collection.enabled: "true"
         volumes:
         - "elastic_data:/usr/share/elasticsearch/data"
+        ports:
+        - "9200:9200"
+        - "9300:9300"
+        network_mode: bridge
         log_driver: "json-file"
         log_options: 
           max-size: "50m"
