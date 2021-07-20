@@ -71,11 +71,19 @@
         restart: unless-stopped
         env:
         ports:
-        - 5000:5000
+        - "5000:5000/tcp"
+        - "5000:5000/udp"
+        - "5045:5045/tcp"
+        - "12201:12201/udp"
+        - "9600:9600"
         - 5044:5044
+        - "5046:5046"
         volumes:
         - "/usr/share/logstash/pipeline://usr/share/logstash/pipeline:ro"
         log_driver:
         log_options: 
           max-size: "50m"
           max-file: "3" 
+        depends_on: 
+          - elasticsearch
+          - kibana
