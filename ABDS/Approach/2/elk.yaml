@@ -32,7 +32,7 @@
         name: "kibana_container"
         image: docker.elastic.co/elasticsearch/kibana:7.13.3
         env:
-          server_name: prod.airbus.de
+          server_name: prod.mysite.de
           ELASTICSEARCH_HOSTS: http://{{ elastic_container}}:9200"
           ELASTICSEARCH_USERNAME: "kibana"
           ELASTICSEARCH_PASSWORD: "DSEwW$*]_5P3m-}@Hqb@"
