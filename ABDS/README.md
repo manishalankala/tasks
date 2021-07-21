@@ -64,5 +64,19 @@ sudo yum install ansible  - RHEL
 Reference links:
 
 https://www.docker.elastic.co/r/elasticsearch
+
 https://www.docker.elastic.co/r/logstash
+
+
+https://www.docker.elastic.co/r/beats
+
+
+= docker.elastic.co/beats/auditbeat:7.13.3
+
+= docker.elastic.co/beats/packetbeat:7.13.3
+
+= docker.elastic.co/beats/filebeat:7.13.3
+
+= docker.elastic.co/beats/metricbeat:7.13.3
+= 
 https://www.docker.elastic.co/r/kibana
