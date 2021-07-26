@@ -1,0 +1,36 @@
+- name: Create elk folder
+  ansible.builtin.file:
+    path: /mnt/elk
+    state: directory
+    mode: '0755'
+
+- name: Copy over docker-compose folder
+  ansible.posix.synchronize:
+    src: ../../files/
+    dest: /mnt/elk
+    recursive: true
+
+
+- name: Tear down existing services
+  community.docker.docker_compose:
+    project_src: /mnt/elk
+    state: absent
+
+- name: Create and start services
+  community.docker.docker_compose:
+    project_src: /mnt/elk
+  register: output
+
+- name: Print output
+  ansible.builtin.debug:
+    var: output
+
+- name: Run `docker-compose up` again
+  community.docker.docker_compose:
+    project_src: /mnt/elk
+    build: false
+  register: output
+
+- name: Print output
+  ansible.builtin.debug:
+    var: output
