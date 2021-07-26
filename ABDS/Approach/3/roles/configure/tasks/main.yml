@@ -1,0 +1,21 @@
+- name: Install packages
+  yum:
+    name:
+      - python3
+      - openssl-devel
+      - python3-devel
+      - libffi-devel
+    state: present
+- name: Set pip3 as default pip
+  file:
+    src: /usr/bin/pip3
+    dest: /usr/bin/pip
+    state: link
+- name: Install pip packages
+  pip:
+    name:
+      - docker
+      - wheel
+      - rust
+- name: Install collections
+  shell: ansible-galaxy collection install community.docker && ansible-galaxy collection install ansible.posix
