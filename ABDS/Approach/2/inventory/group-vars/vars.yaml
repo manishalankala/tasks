@@ -55,7 +55,8 @@ filebeat_servername: status.mysite.com
 filebeat_conf_dir: /usr/share/filebeat
 
 
-
+vault_elastic_password: password
+vault_kibana_password: password
 
 
 log_driver: "json-file"
