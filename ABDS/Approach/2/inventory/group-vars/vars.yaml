@@ -1,0 +1,63 @@
+#####################
+### Elasticsearch ###
+#####################
+
+elasticsearch_image: docker.elastic.co/elasticsearch/elasticsearch:7.13.3
+elasticsearch_hostname: es01
+elasticsearch_conf_dir: /usr/share/elasticsearch
+
+
+#####################
+### Kibana ###
+#####################
+
+kibana_image: docker.elastic.co/kibana/kibana:7.13.3
+kibana_hostname: ki01
+
+#####################
+### logstash ###
+#####################
+
+logstash_image: docker.elastic.co/logstash/logstash:7.13.3
+logstash_hostname: lo01
+logstash_conf_dir: /usr/share/logstash
+
+
+#####################
+### heartbeat ###
+#####################
+
+heartbeat_image: docker.elastic.co/beats/heartbeat:7.13.3
+heartbeat_hostname: hb01
+heartbeat_servername: status.mysite.com
+heartbeat_conf_dir: /usr/share/heartbeat
+heartbeat_urls:
+- https://mysite.com
+- https://status.mysite.com
+
+#####################
+### mericbeat ###
+#####################
+
+metricbeat_image: docker.elastic.co/beats/metricbeat:7.13.3
+metricbeat_hostname: mb01
+metricbeat_servername: status.mysite.com
+metricbeat_conf_dir: /usr/share/metricbeat
+
+
+#####################
+### filebeat ###
+#####################
+
+filebeat_image: docker.elastic.co/beats/filebeat:7.13.3
+filebeat_hostname: fb01
+filebeat_servername: status.mysite.com
+filebeat_conf_dir: /usr/share/filebeat
+
+
+
+
+
+log_driver: "json-file"
+log_max_size: "10m"
+log_max_file: "3"
