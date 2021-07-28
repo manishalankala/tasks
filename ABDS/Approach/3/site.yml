@@ -1,5 +1,6 @@
 ---
-- hosts: all
+- hosts: [a]
+  gather_facts: false
   roles:
     - configure
     - elk
