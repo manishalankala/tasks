@@ -24,24 +24,23 @@ create instance in azure ubuntu 18 or 20
 ### Docker
 ~~~
 
-sudo apt update
-sudo apt upgrade
-sudo apt-get install curl apt-transport-https ca-certificates software-properties-common
+apt update
+apt upgrade
+apt-get install curl apt-transport-https ca-certificates software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-sudo apt update
-sudo apt install docker-ce
+add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+apt update
+apt install docker-ce
 ~~~
 
 ### ansible
 
 ~~~
-apt-get install python-pip python-dev
-apt install python3-pip
-sudo apt install software-properties-common
-sudo apt-add-repository ppa:ansible/ansible
-sudo apt update
-sudo apt-get install ansible -y
+apt-get install python3-pip python-dev
+apt install software-properties-common
+apt-add-repository ppa:ansible/ansible
+apt update
+apt-get install ansible -y
 
 ~~~
 
@@ -53,7 +52,7 @@ sudo apt install ansible
 
 or 
 
-sudo apt-get install python-pip python-dev
+apt-get install python-pip python-dev
 sudo -H pip install ansible==2.9.7
 ~~~
 
