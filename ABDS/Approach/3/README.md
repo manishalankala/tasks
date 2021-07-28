@@ -120,3 +120,4 @@ sudo systemctl status jenkins
 ![image](https://user-images.githubusercontent.com/33985509/127209320-9c6b245d-168b-4dd2-bb42-c367c0488960.png)
 
 ![image](https://user-images.githubusercontent.com/33985509/127304389-744a3c5d-3156-4991-b237-0df3c054ac46.png)
+
