@@ -1,4 +1,10 @@
-create instance in azure ubuntu 18
+
+![image](https://user-images.githubusercontent.com/33985509/127287742-f4631405-0166-49cf-ac94-7e9a20f93467.png)
+
+
+
+
+create instance in azure ubuntu 18 or 20
 
 ### Docker
 ~~~
