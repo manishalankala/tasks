@@ -12,7 +12,7 @@ pipeline {
 	stage('Test') {
             steps {
                 echo '> Using ansible-lint'
-		sh 'yum install python3'
+		sh 'apt install python3'
                 sh 'pip3 install "ansible-lint[yamllint]"'
 		sh 'ansible-lint'
                 
