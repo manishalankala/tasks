@@ -4,6 +4,20 @@
 
 
 
+
+## Alternative approach
+
+![image](https://user-images.githubusercontent.com/33985509/127288933-7f38203d-5836-4251-af99-5bc429eda03c.png)
+
+
+
+
+
+
+
+
+
+
 create instance in azure ubuntu 18 or 20
 
 ### Docker
