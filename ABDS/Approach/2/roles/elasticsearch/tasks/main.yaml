@@ -1,0 +1,24 @@
+- name: Create elastic search volume
+  docker_volume:
+    name: esdata
+    driver: local
+- name: Start elastic search container
+  docker_container:
+    name: "es01"
+    image: "docker.elastic.co/elasticsearch/elasticsearch:7.13.3"
+    env:
+      discovery.type: "single-node"
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+      xpack.security.enabled: "true"
+      xpack.monitoring.collection.enabled: "true"
+    volumes:
+    - "esdata:/usr/share/elasticsearch/data"
+    ulimits:
+    - nofile:65535:65535
+    networks:
+    - name: "bridge"
+    state: started
+    log_driver: "json-file"
+    log_options:
+      max-size: "10m"
+      max-file: "3"
