@@ -136,7 +136,7 @@ resource "aws_security_group" "allow_ssh1" {
 ########### VPC-B ################
 ################################
 
-resource "aws_vpc" "vpc-a" {  
+resource "aws_vpc" "vpc-b" {  
   name                 = "VPC-B"
   cidr_block           = "10.2.0.0/16"
   enable_dns_support   = true
@@ -375,3 +375,23 @@ depends_on = [
     Name = "eks-cluster-default-node-group"
   }
 }
+
+  
+  
+#### REDIS #####
+  
+resource "aws_security_group" "redis" {
+  vpc_id = aws_vpc.vpc-b.id 
+  
+  
+resource "aws_elasticache_cluster" "redis" {
+  cluster_id           = "${var.cluster_id}"
+  engine               = "redis"
+  engine_version       = "2.8.24"
+  maintenance_window   = "sun:05:00-sun:06:00"
+  node_type            = "cache.m3.medium"
+  num_cache_nodes      = "1"
+  parameter_group_name = "default.redis2.8"
+  port                 = "6379"
+  subnet_group_name    = "${aws_elasticache_subnet_group.default.name}"
+  security_group_ids   = ["${aws_security_group.redis.id}"]
