@@ -382,10 +382,16 @@ depends_on = [
   
 resource "aws_security_group" "redis" {
   vpc_id = aws_vpc.vpc-b.id 
+
   
+resource "aws_elasticache_subnet_group" "default" {
+  name        = "subnet-group-redis"
+  description = "Private subnets for the ElastiCache instances"
+  subnet_id  = aws_subnet.privsub2.id
+}
   
 resource "aws_elasticache_cluster" "redis" {
-  cluster_id           = "${var.cluster_id}"
+  cluster_id           = "rediscluster"
   engine               = "redis"
   engine_version       = "2.8.24"
   maintenance_window   = "sun:05:00-sun:06:00"
@@ -395,3 +401,4 @@ resource "aws_elasticache_cluster" "redis" {
   port                 = "6379"
   subnet_group_name    = "${aws_elasticache_subnet_group.default.name}"
   security_group_ids   = ["${aws_security_group.redis.id}"]
+}
