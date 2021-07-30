@@ -1,4 +1,23 @@
 
+Terraform :
+
+terraform init
+
+terraform plan
+
+terraform apply
+
+
+
+Resources to use for implementaion
+
+aws_autoscaling_group
+aws_route53_zone
+aws_route53_record
+
+
+
+
 
 Transit gateway :
 
@@ -9,11 +28,7 @@ To connect multiple VPCs,acts as a gateway connecting up to 5.000 networks best 
 
 
 
-Resources to use for implementaion
 
-aws_autoscaling_group
-aws_route53_zone
-aws_route53_record
 
 
 
