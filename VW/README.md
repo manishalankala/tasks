@@ -1,5 +1,5 @@
 
-Terraform :
+### Terraform :
 
 terraform init
 
@@ -9,7 +9,7 @@ terraform apply
 
 
 
-Resources to use for implementaion
+### Resources to use for implementaion
 
 aws_autoscaling_group
 
