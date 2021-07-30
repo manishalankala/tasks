@@ -45,9 +45,18 @@ Transit gateway :
 To connect multiple VPCs,acts as a gateway connecting up to 5.000 networks best alternative to vpc peering
 
 
-
+## Blue Green deployment
 
 Scaling of nodes can be implemented via replica set in deployment.yaml - approach would be a blue green deployment
+
+
+Green application online, blue application down, traffic goes to green
+
+Green application online, blue application online, traffic goes to green
+
+Green application online, blue application online, traffic goes to blue
+
+Green application down, blue application online, traffic goes to blue
 
 
 References :
