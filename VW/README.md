@@ -12,10 +12,28 @@ terraform apply
 Resources to use for implementaion
 
 aws_autoscaling_group
+
 aws_route53_zone
+
 aws_route53_record
 
+aws_vpc
 
+aws_subnet
+
+aws_internet_gateway
+
+aws_main_route_table_association
+
+aws_route_table
+
+aws_ec2_transit_gateway
+
+aws_ec2_transit_gateway_vpc_attachment
+
+aws_ec2_transit_gateway_route_table
+
+aws_ec2_transit_gateway_route_table_association
 
 
 
