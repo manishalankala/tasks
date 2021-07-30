@@ -8,6 +8,14 @@ To connect multiple VPCs,acts as a gateway connecting up to 5.000 networks best 
 
 
 
+
+Resources to use for implementaion
+
+aws_autoscaling_group
+
+
+
+
 References :
 
 # Hub & Spoke 
