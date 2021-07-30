@@ -37,6 +37,9 @@ aws_ec2_transit_gateway_route_table_association
 
 
 
+
+
+
 Transit gateway :
 
 To connect multiple VPCs,acts as a gateway connecting up to 5.000 networks best alternative to vpc peering
