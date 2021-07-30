@@ -384,7 +384,7 @@ resource "aws_security_group" "redis" {
   vpc_id = aws_vpc.vpc-b.id 
 
   
-resource "aws_elasticache_subnet_group" "default" {
+resource "aws_elasticache_subnet_group" "redissbg" {
   name        = "subnet-group-redis"
   description = "Private subnets for the ElastiCache instances"
   subnet_id  = aws_subnet.privsub2.id
@@ -399,6 +399,21 @@ resource "aws_elasticache_cluster" "redis" {
   num_cache_nodes      = "1"
   parameter_group_name = "default.redis2.8"
   port                 = "6379"
-  subnet_group_name    = "${aws_elasticache_subnet_group.default.name}"
-  security_group_ids   = ["${aws_security_group.redis.id}"]
+  subnet_group_name    = aws_elasticache_subnet_group.redissbg.name
+  security_group_ids   = aws_security_group.redis.id
 }
+
+  
+resource "aws_elasticache_replication_group" "redis" {
+  replication_group_id          = "tf-rep-group-1"
+  availability_zones            = ["us-east-1a", "us-east-1c"]
+  replication_group_description = "Replication group for Redis"
+  automatic_failover_enabled    = true
+  number_cache_clusters         = 2
+  node_type                     = "cache.m3.medium"
+  engine_version                = "2.8.24"
+  parameter_group_name          = "default.redis2.8"
+  subnet_group_name             = "${var.subnet_group}"
+  security_group_ids            = 
+  maintenance_window            = "sun:05:00-sun:06:00"
+  port                          = "6379"
