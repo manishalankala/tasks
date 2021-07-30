@@ -5,6 +5,13 @@ provider "aws" {
 
 
 
+
+
+
+
+
+
+
 ################################
 ########### VPC-A ################
 ################################
@@ -124,10 +131,34 @@ resource "aws_security_group" "allow_ssh1" {
     cidr_blocks = ["10.0.0.0/16"]
   }
   
+
+  
+  
+###### bucket #########
+ 
+resource "aws_s3_bucket" "bucket-a" {
+  bucket = "mybucket"
+  acl    = "private"
+}
   
   
   
   
+  
+########################  
+##### ALB #######
+########################  
+  
+  
+resource "aws_lb" "application_loadbalancer" {
+  name               = "alb"
+  internal           = false
+  load_balancer_type = "application"
+  security_groups    = aws_security_group.allow_tcp1.id
+  subnets            = aws_subnet.pubsub1.id
+  enable_deletion_protection = true
+  
+resource "aws_lb_listener" "listeners" {  
   
   
   
