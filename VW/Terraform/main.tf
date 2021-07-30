@@ -353,20 +353,20 @@ resource "aws_eks_cluster" "eks" {
   
   
   
-  resource "aws_eks_node_group" "eks-node-group" {
-  cluster_name    = "eks-cluster"
-  node_group_name = "eks-cluster-default-node-group"
-  node_role_arn   = aws_iam_role.node.arn
-  subnet_ids      = data.aws_subnet_ids.private.ids
-  scaling_config {
+resource "aws_eks_node_group" "eks-node-group" {
+cluster_name    = "eks-cluster"
+node_group_name = "eks-cluster-default-node-group"
+node_role_arn   = aws_iam_role.node.arn
+subnet_ids      = data.aws_subnet_ids.private.ids
+scaling_config {
     desired_size = 2
     max_size     = 5
     min_size     = 1
   }
-  instance_types = t3.micro
+instance_types = t3.micro
   # Ensure that IAM Role permissions are created before and deleted after EKS Node Group handling.
   # Otherwise, EKS will not be able to properly delete EC2 Instances and Elastic Network Interfaces.
-  depends_on = [
+depends_on = [
     aws_eks_cluster.eks,
     aws_iam_role_policy_attachment.node-AmazonEKSWorkerNodePolicy,
     aws_iam_role_policy_attachment.node-AmazonEKS_CNI_Policy
