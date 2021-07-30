@@ -44,11 +44,6 @@ Transit gateway :
 
 To connect multiple VPCs,acts as a gateway connecting up to 5.000 networks best alternative to vpc peering
 
-![image](https://user-images.githubusercontent.com/33985509/127633555-94b3d3c6-d5e0-40a5-8366-df5bf8e7e951.png)
-
-
-
-
 
 
 
