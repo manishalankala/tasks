@@ -47,6 +47,8 @@ To connect multiple VPCs,acts as a gateway connecting up to 5.000 networks best 
 
 
 
+Scaling of nodes can be implemented via replica set in deployment.yaml - approach would be a blue green deployment
+
 
 References :
 
