@@ -1,5 +1,5 @@
 ---
-- hosts: [a]
+- hosts: [localhost]
   gather_facts: false
   roles:
     - configure
