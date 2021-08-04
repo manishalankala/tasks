@@ -6,7 +6,7 @@
 
 - name: Copy over docker-compose folder
   ansible.posix.synchronize:
-    src: dectask/ABDS/Approach/3/files/
+    src: ABDS/Approach/3/files/
     dest: /mnt/elk
     recursive: true
 
