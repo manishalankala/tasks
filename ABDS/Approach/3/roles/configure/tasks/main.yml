@@ -6,11 +6,13 @@
       - python3-dev
       - libffi-dev
     state: present
+    force: yes
 - name: Set pip3 as default pip
   file:
     src: /usr/bin/pip3
     dest: /usr/bin/pip
     state: link
+    force: yes
 - name: Install pip packages
   pip:
     name:
