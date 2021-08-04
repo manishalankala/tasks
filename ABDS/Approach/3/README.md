@@ -161,6 +161,6 @@ git clone https://github.com/manishalankala/dectask1.git
 
 cd dectask1/ABDS/Approach/3/
 
-ansible-playbook -i in site.yml
+ansible-playbook -i inventory.ini site.yml -vvv
 
 
