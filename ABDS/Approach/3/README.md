@@ -154,7 +154,7 @@ ansible-galaxy collection install ansible.posix
 
 
 
-Steps to run in local : 
+### Steps to run in local : 
 
 ssh -i pemfile user@ip (on a vm)
 
