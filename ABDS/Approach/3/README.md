@@ -119,7 +119,7 @@ sudo systemctl status jenkins
 
 ![image](https://user-images.githubusercontent.com/33985509/127209320-9c6b245d-168b-4dd2-bb42-c367c0488960.png)
 
-![image](https://user-images.githubusercontent.com/33985509/127304389-744a3c5d-3156-4991-b237-0df3c054ac46.png)
+
 
 
 
@@ -133,6 +133,7 @@ sol : add under /etc/ansible/ansible.cfg
 
 ![image](https://user-images.githubusercontent.com/33985509/128192997-b3c91a6d-89c6-4f1f-be19-ae261f9391f9.png)
 
+![image](https://user-images.githubusercontent.com/33985509/127304389-744a3c5d-3156-4991-b237-0df3c054ac46.png)
 
 ![Pasted Graphic 2](https://user-images.githubusercontent.com/33985509/128193022-1da729f7-ddc1-4626-ab00-f04761635ec2.png)
 
