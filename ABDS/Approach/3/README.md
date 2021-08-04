@@ -121,3 +121,46 @@ sudo systemctl status jenkins
 
 ![image](https://user-images.githubusercontent.com/33985509/127304389-744a3c5d-3156-4991-b237-0df3c054ac46.png)
 
+
+
+
+
+Errors :
+
+![Pasted Graphic 1](https://user-images.githubusercontent.com/33985509/128192628-2800df36-fe03-4121-ba0e-ae4c0dbbbd27.png)
+
+sol : add under 
+
+![image](https://user-images.githubusercontent.com/33985509/128192997-b3c91a6d-89c6-4f1f-be19-ae261f9391f9.png)
+
+
+![Pasted Graphic 2](https://user-images.githubusercontent.com/33985509/128193022-1da729f7-ddc1-4626-ab00-f04761635ec2.png)
+
+Sol : 
+
+chmod 666 /var/run/docker.sock
+
+sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev wget build-essential checkinstall
+
+
+![Pasted Graphic](https://user-images.githubusercontent.com/33985509/128193224-d0d64257-bf39-419b-9270-69e481ebedc2.png)
+
+sol: 
+
+ansible-galaxy collection install community.docker
+
+ansible-galaxy collection install ansible.posix
+
+
+
+Steps to run in local : 
+
+ssh -i pemfile user@ip (on a vm)
+
+git clone https://github.com/manishalankala/dectask1.git
+
+cd dectask1/ABDS/Approach/3/
+
+ansible-playbook -i in site.yml
+
+
