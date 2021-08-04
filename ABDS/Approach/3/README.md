@@ -125,11 +125,11 @@ sudo systemctl status jenkins
 
 
 
-Errors :
+### Errors :
 
 ![Pasted Graphic 1](https://user-images.githubusercontent.com/33985509/128192628-2800df36-fe03-4121-ba0e-ae4c0dbbbd27.png)
 
-sol : add under 
+sol : add under /etc/ansible/ansible.cfg
 
 ![image](https://user-images.githubusercontent.com/33985509/128192997-b3c91a6d-89c6-4f1f-be19-ae261f9391f9.png)
 
