@@ -1,4 +1,25 @@
 
+Running a Maltego TRX Server
+Task 2
+
+```
+In Maltego Operations, you are asked to run a Maltego TRX Server as a Docker Container on Azure
+and fully automate the installation.
+• To do this, you will have to develop a program/script in the language of your choice which will
+execute the deployment. However, the prerequisite is the use of Terraform (recommended) and/or
+the Azure CLI and that the program/script installs all dependencies and requirements on the
+deployment machine and can therefore be executed by an arbitrarily selected machine. The
+execution of the script should finish when everything is up and running.
+• In order to be able to fulfill the task, a repository for the Docker container and related credentials is
+provided.
+• Present the deployed script to the team.
+The TRX Server and the documentation you can find here: https://github.com/paterva/maltego-trx
+```
+
+
+
+
+
 
 Create a Service Connection  and name the service connection
 
