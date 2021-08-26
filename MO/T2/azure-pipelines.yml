@@ -25,3 +25,9 @@ pool:
     containerRegistry: 'docker_registry'
     repository: 'organizationname/reponamefrontend'
     command: 'push'
+
+- task: Bash@3
+  displayName: "Set tag version in K8S configuration"
+  inputs:
+    targetType: 'inline'
+    script: 'sed -i "s/\:latest/\:$(Build.BuildId)/g; s/\:fixed-latest/\:latest/g" $(System.DefaultWorkingDirectory)/k8s.yml'
