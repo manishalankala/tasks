@@ -8,6 +8,13 @@ azure-client-secret   = "xxxxxxxxxxxx"
 azure-tenant-id       = "xxxxxxxxxxxx"
 
 
+####################
+# Common Variables #
+####################
+
+location    = "North Europe"
+
+
 ###########
 # Network #
 ###########
