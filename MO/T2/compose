@@ -1,0 +1,52 @@
+# Maltego Standard Transforms (CTAS)
+version: "3"
+services:
+  ctastransforms:
+    image: registry.paterva.com/ctastransforms:latest
+    restart: unless-stopped
+    depends_on:
+      - ctasdispatcher
+    volumes:
+      - maltego:/etc/maltego/
+
+  ctasdispatcher:
+    image: registry.paterva.com/ctasdispatcher:latest
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    ports:
+      - 443:443
+    volumes:
+      - nginx_logs:/var/log/nginx/
+      - maltego:/etc/maltego/
+
+  jinx-waybacktransforms:
+    image: registry.paterva.com/jinx-waybacktransforms:latest
+    restart: unless-stopped
+    depends_on:
+      - ctasdispatcher
+
+  jinx-propstransforms:
+    image: registry.paterva.com/jinx-propstransforms:latest
+    restart: unless-stopped
+    depends_on:
+     - ctasdispatcher
+
+  jinx-httptransforms:
+    image: registry.paterva.com/jinx-httptransforms:latest
+    restart: unless-stopped
+    depends_on:
+      - ctasdispatcher
+
+  postgres:
+    image: postgres:10
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: M5F0PNem3HPk
+    volumes:
+      - ctas_db_data:/var/lib/postgresql/data
+
+volumes:
+  ctas_db_data:
+  nginx_logs:
+  maltego:
