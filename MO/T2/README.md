@@ -1,6 +1,6 @@
 
 
-Create a Service Connection 
+Create a Service Connection  and name the service connection
 
 
 ![image](https://user-images.githubusercontent.com/33985509/130935456-495e88e9-dbdf-47dd-b45c-8193b45085f8.png)
