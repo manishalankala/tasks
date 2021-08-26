@@ -27,6 +27,8 @@ spec:
             limits:
               cpu: 1
               memory: 4Gi
+      imagePullSecrets:
+      - name: dockerpullsecret
 ---
 apiVersion: v1
 kind: Service
