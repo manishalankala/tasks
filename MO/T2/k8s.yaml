@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: maltego
-          image: organization/repo:latest
+          image: organizationname/reponame:latest
           imagePullPolicy: Always
           ports:
             - name: listen-port
