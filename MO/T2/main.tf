@@ -61,12 +61,19 @@ resource "azurerm_subnet" "psubnet" {
   resource_group_name  = azurerm_resource_group.rg.name
 }
 
+###########################
+
+###########################
 
 resource "azurerm_network_security_group" "nsg" {
   name                = "dev-nsg"
   location            = "${var.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
 }
+
+###########################
+# Inbound- ssh
+###########################
 
 
 resource "azurerm_network_security_rule" "rulessh" {
@@ -82,6 +89,10 @@ resource "azurerm_network_security_rule" "rulessh" {
   resource_group_name         = "${azurerm_resource_group.rg.name}"
   network_security_group_name = "${azurerm_network_security_group.nsg.name}"
 }
+
+###########################
+# Inbound - https
+###########################
 
 
 resource "azurerm_network_security_rule" "rulehttps" {
