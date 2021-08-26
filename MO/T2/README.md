@@ -39,3 +39,7 @@
 ### Errors
 
 ERROR: unauthorized: You do not have permission to download this server image. Please ensure that this server was purchased with your most recent order.
+
+Username: maltego
+
+Password: tasx
