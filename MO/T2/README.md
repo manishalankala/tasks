@@ -34,3 +34,8 @@
 ### to add compose task:
 
 ![image](https://user-images.githubusercontent.com/33985509/130940979-e303295c-d0b2-44be-a1a0-f02b11c6f4bb.png)
+
+
+### Errors
+
+ERROR: unauthorized: You do not have permission to download this server image. Please ensure that this server was purchased with your most recent order.
