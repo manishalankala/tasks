@@ -51,7 +51,7 @@ resource "azurerm_subnet" "gateway-subnet" {
 
 
 ###########################
-# Create a Hub Subnet
+# Create a private Subnet
 ###########################
 
 resource "azurerm_subnet" "psubnet" {
