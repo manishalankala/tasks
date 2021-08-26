@@ -168,6 +168,11 @@ resource "azurerm_storage_container" "storec" {
 }
 
 
+###########################
+# Linux Virtual Machine
+###########################
+
+
 resource "azurerm_virtual_machine" "vm" {
   name                  = "vm1"
   location              = "${var.location}"
@@ -183,8 +188,8 @@ resource "azurerm_virtual_machine" "vm" {
   }
 
   storage_os_disk {
-    name          = "${var.name_prefix}osdisk"
-    vhd_uri       = "${azurerm_storage_account.stor.primary_blob_endpoint}${azurerm_storage_container.storc.name}/${var.name_prefix}osdisk.vhd"
+    name          = "osdisk"
+    vhd_uri       = "${azurerm_storage_account.store.primary_blob_endpoint}${azurerm_storage_container.storec.name}/osdisk.vhd"
     caching       = "ReadWrite"
     create_option = "FromImage"
   }
@@ -204,7 +209,7 @@ resource "azurerm_virtual_machine" "vm" {
     }]
   }
 
-  depends_on = ["azurerm_storage_account.stor"]
+  depends_on = ["azurerm_storage_account.store"]
 }
 
 
