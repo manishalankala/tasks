@@ -108,3 +108,15 @@ resource "azurerm_network_security_rule" "rulehttps" {
   resource_group_name         = "${azurerm_resource_group.rg.name}"
   network_security_group_name = "${azurerm_network_security_group.nsg.name}"
 }
+
+
+###########################
+
+###########################
+
+resource "azurerm_public_ip" "pip" {
+  name                         = "pub-ip"
+  location                     = "${var.location}"
+  resource_group_name          = "${azurerm_resource_group.rg.name}"
+  public_ip_address_allocation = "dynamic"
+}
