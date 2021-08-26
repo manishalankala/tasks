@@ -120,3 +120,18 @@ resource "azurerm_public_ip" "pip" {
   resource_group_name          = "${azurerm_resource_group.rg.name}"
   public_ip_address_allocation = "dynamic"
 }
+
+
+resource "azurerm_storage_account" "store" {
+  name                = "dev-store"
+  location            = "${var.location}"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
+  account_type        = "Standard_LRS"
+}
+
+resource "azurerm_storage_container" "storec" {
+  name                  = "dev-storec"
+  resource_group_name   = "${azurerm_resource_group.rg.name}"
+  storage_account_name  = "${azurerm_storage_account.store.name}"
+  container_access_type = "private"
+}
