@@ -1,6 +1,17 @@
 
 
 
+### Commands
+
+az account list-locations
+
+terraform init
+
+terraform validate
+
+terraform plan
+
+terraform apply
 
 
 
