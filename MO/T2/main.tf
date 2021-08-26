@@ -122,6 +122,11 @@ resource "azurerm_public_ip" "pip" {
 }
 
 
+
+###########################
+# Storage 
+###########################
+
 resource "azurerm_storage_account" "store" {
   name                = "dev-store"
   location            = "${var.location}"
@@ -129,9 +134,53 @@ resource "azurerm_storage_account" "store" {
   account_type        = "Standard_LRS"
 }
 
+
+###########################
+# Container
+###########################
 resource "azurerm_storage_container" "storec" {
   name                  = "dev-storec"
   resource_group_name   = "${azurerm_resource_group.rg.name}"
   storage_account_name  = "${azurerm_storage_account.store.name}"
   container_access_type = "private"
+}
+
+
+resource "azurerm_virtual_machine" "vm" {
+  name                  = "vm1"
+  location              = "${var.location}"
+  resource_group_name   = "${azurerm_resource_group.rg.name}"
+  vm_size               = "${var.vm_size}"
+  network_interface_ids = ["${azurerm_network_interface.nic.id}"]
+
+  storage_image_reference {
+    publisher = "${var.image_publisher}"
+    offer     = "${var.image_offer}"
+    sku       = "${var.image_sku}"
+    version   = "${var.image_version}"
+  }
+
+  storage_os_disk {
+    name          = "${var.name_prefix}osdisk"
+    vhd_uri       = "${azurerm_storage_account.stor.primary_blob_endpoint}${azurerm_storage_container.storc.name}/${var.name_prefix}osdisk.vhd"
+    caching       = "ReadWrite"
+    create_option = "FromImage"
+  }
+
+  os_profile {
+    computer_name  = "${var.hostname}"
+    admin_username = "${var.admin_username}"
+    admin_password = "${var.admin_password}"
+  }
+
+  os_profile_linux_config {
+    disable_password_authentication = "${var.disable_password_authentication}"
+
+    ssh_keys = [{
+      path     = "/home/${var.admin_username}/.ssh/authorized_keys"
+      key_data = "${var.ssh_public_key}"
+    }]
+  }
+
+  depends_on = ["azurerm_storage_account.stor"]
 }
