@@ -43,7 +43,7 @@ resource "azurerm_virtual_network" "vnet" {
 ###########################
 
 resource "azurerm_subnet" "gateway-subnet" {
-  name                 = "GatewaySubnet" # do not rename
+  name                 = "dev-gateway-subnet" # do not rename
   address_prefixes     = [var.gateway-subnet]
   virtual_network_name = azurerm_virtual_network.hub-vnet.name
   resource_group_name  = azurerm_resource_group.hub-rg.name
@@ -62,7 +62,7 @@ resource "azurerm_subnet" "psubnet" {
 }
 
 ###########################
-
+# Network security group
 ###########################
 
 resource "azurerm_network_security_group" "nsg" {
@@ -119,6 +119,28 @@ resource "azurerm_public_ip" "pip" {
   location                     = "${var.location}"
   resource_group_name          = "${azurerm_resource_group.rg.name}"
   public_ip_address_allocation = "dynamic"
+}
+
+
+###########################
+# Interface
+###########################
+
+
+resource "azurerm_network_interface" "nic" {
+  name                      = "dev-nic"
+  location                  = "${var.location}"
+  resource_group_name       = "${azurerm_resource_group.rg.name}"
+  network_security_group_id = "${azurerm_network_security_group.nsg.id}"
+
+  ip_configuration {
+    name                          = "ipconfig"
+    subnet_id                     = "${azurerm_subnet.gateway-subnet.id}"
+    private_ip_address_allocation = "dynamic"
+    public_ip_address_id          = "${azurerm_public_ip.pip.id}"
+  }
+
+  depends_on = ["azurerm_network_security_group.nsg"]
 }
 
 
@@ -184,3 +206,5 @@ resource "azurerm_virtual_machine" "vm" {
 
   depends_on = ["azurerm_storage_account.stor"]
 }
+
+
