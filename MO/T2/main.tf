@@ -32,7 +32,7 @@ resource "azurerm_resource_group" "rg" {
 
 resource "azurerm_virtual_network" "vnet" {
   name                = "dev-vnet"
-  address_space       = [var.hub-vnet]
+  address_space       = [var.vnet]
   location              = azurerm_resource_group.rg.location
   resource_group_name   = azurerm_resource_group.rg.name
 }
@@ -56,7 +56,7 @@ resource "azurerm_subnet" "gateway-subnet" {
 
 resource "azurerm_subnet" "psubnet" {
   name                 = "private-subnet" # do not rename
-  address_prefixes     = [var.hub-resources-subnet]
+  address_prefixes     = [var.private-subnet]
   virtual_network_name = azurerm_virtual_network.vnet.name
   resource_group_name  = azurerm_resource_group.rg.name
 }
