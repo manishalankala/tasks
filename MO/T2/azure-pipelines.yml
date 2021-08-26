@@ -31,3 +31,25 @@ pool:
   inputs:
     targetType: 'inline'
     script: 'sed -i "s/\:latest/\:$(Build.BuildId)/g; s/\:fixed-latest/\:latest/g" $(System.DefaultWorkingDirectory)/k8s-deploy/k8s.yaml'
+
+- task: CopyFiles@2
+  displayName: "Copy Kubernetes Manifest"
+  inputs:
+    sourceFolder: $(System.DefaultWorkingDirectory)/k8s-deploy/
+    contents: '**'
+    targetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  displayName: "Publish Artifact"
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'artifact'
+    publishLocation: 'Container'
+
+- task: KubernetesManifest@0
+  displayName: "k8s manifest"
+  inputs:
+    action: 'deploy'
+    kubernetesServiceConnection: 'clusterdev'
+    namespace: 'default'
+    manifests: 'k8s-deploy/k8s.yaml'
