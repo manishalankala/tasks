@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: maltego
+spec:
+  selector:
+    matchLabels:
+      app: maltego
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: maltego
+    spec:
+      containers:
+        - name: maltego
+          image: organization/repo:latest
+          imagePullPolicy: Always
+          ports:
+            - name: listen-port
+              containerPort: 8081
+          resources:
+            requests:
+              cpu: 10m
+              memory: 4Gi
+            limits:
+              cpu: 1
+              memory: 4Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: maltego
+  annotations:
+    dev.okteto.com/auto-ingress: "true"
+spec:
+  type: ClusterIP  
+  ports:
+  - name: "maltego"
+    port: 8081
+  selector:
+    app: maltego
