@@ -12,3 +12,11 @@ Create a Service Connection  and name the service connection
 2.
 
 ![image](https://user-images.githubusercontent.com/33985509/130936093-76a095ee-dacd-4d0b-b028-702c2b18c36c.png)
+
+
+
+
+For Releases :
+
+![image](https://user-images.githubusercontent.com/33985509/130936650-75965437-425e-42be-9f10-d4f18b8f371a.png)
+
