@@ -1,0 +1,54 @@
+trigger: 
+- master
+
+pool:
+  vmImage: ubuntu-latest
+  
+- task: Docker@2
+  displayName: "Docker Login to Paterva's Docker registry"
+  inputs:
+    containerRegistry: 'Paterva_docker_registry'
+    command: 'login'        
+    
+- task: DockerCompose@0
+  inputs:
+    containerregistrytype: 'Azure Container Registry'
+    dockerComposeFile: '**/docker-compose.yml'
+    action: 'Run a Docker Compose command'
+    dockerComposeCommand: 'docker-compose -f docker-compose.yml up -d'    
+
+    
+- task: Docker@2
+  displayName: "Docker Push"
+  inputs:
+    containerRegistry: 'docker_registry'
+    repository: 'organizationname/reponamefrontend'
+    command: 'push'
+
+- task: Bash@3
+  displayName: "Set tag version in K8S configuration"
+  inputs:
+    targetType: 'inline'
+    script: 'sed -i "s/\:latest/\:$(Build.BuildId)/g; s/\:fixed-latest/\:latest/g" $(System.DefaultWorkingDirectory)/k8s-deploy/k8s.yaml'
+
+- task: CopyFiles@2
+  displayName: "Copy Kubernetes Manifest"
+  inputs:
+    sourceFolder: $(System.DefaultWorkingDirectory)/k8s-deploy/
+    contents: '**'
+    targetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  displayName: "Publish Artifact"
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'artifact'
+    publishLocation: 'Container'
+
+- task: KubernetesManifest@0
+  displayName: "k8s manifest"
+  inputs:
+    action: 'deploy'
+    kubernetesServiceConnection: 'clusterdev'
+    namespace: 'default'
+    manifests: 'k8s-deploy/k8s.yaml'
