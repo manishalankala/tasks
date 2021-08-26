@@ -5,9 +5,9 @@ pool:
   vmImage: ubuntu-latest
   
 - task: Docker@2
-  displayName: "Docker Login to Paterva's Docker registry"
+  displayName: "Docker Login to paterva's Docker registry"
   inputs:
-    containerRegistry: 'Paterva_docker_registry'
+    containerRegistry: 'paterva_docker_registry'
     command: 'login'
     
 - task: Docker@2
