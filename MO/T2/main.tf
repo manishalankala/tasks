@@ -78,7 +78,7 @@ resource "azurerm_network_security_group" "nsg" {
 
 resource "azurerm_network_security_rule" "rulessh" {
   name                        = "dev-rulessh"
-  priority                    = 100
+  priority                    = 301
   direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "Tcp"
@@ -97,7 +97,7 @@ resource "azurerm_network_security_rule" "rulessh" {
 
 resource "azurerm_network_security_rule" "rulehttps" {
   name                        = "dev-rulehttps"
-  priority                    = 100
+  priority                    = 302
   direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "Tcp"
