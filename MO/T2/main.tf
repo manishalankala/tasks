@@ -111,7 +111,7 @@ resource "azurerm_network_security_rule" "rulehttps" {
 
 
 ###########################
-
+Public IP
 ###########################
 
 resource "azurerm_public_ip" "pip" {
