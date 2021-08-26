@@ -30,4 +30,4 @@ pool:
   displayName: "Set tag version in K8S configuration"
   inputs:
     targetType: 'inline'
-    script: 'sed -i "s/\:latest/\:$(Build.BuildId)/g; s/\:fixed-latest/\:latest/g" $(System.DefaultWorkingDirectory)/k8s.yaml'
+    script: 'sed -i "s/\:latest/\:$(Build.BuildId)/g; s/\:fixed-latest/\:latest/g" $(System.DefaultWorkingDirectory)/k8s-deploy/k8s.yaml'
