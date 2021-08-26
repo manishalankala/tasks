@@ -39,5 +39,6 @@ spec:
   ports:
   - name: "maltego"
     port: 8081
+    targetPort: 8081
   selector:
     app: maltego
