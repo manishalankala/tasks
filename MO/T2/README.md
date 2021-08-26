@@ -7,7 +7,7 @@
 
 
 
-Create a Service Connection  and name the service connection
+### Create a Service Connection  and name the service connection
 
 
 ![image](https://user-images.githubusercontent.com/33985509/130935456-495e88e9-dbdf-47dd-b45c-8193b45085f8.png)
@@ -23,10 +23,14 @@ Create a Service Connection  and name the service connection
 
 
 
-For Releases :
+### For Releases :
 
 ![image](https://user-images.githubusercontent.com/33985509/130936856-b179db4c-859c-4bd5-b621-cc78d7695e1a.png)
 
 
 ![image](https://user-images.githubusercontent.com/33985509/130936650-75965437-425e-42be-9f10-d4f18b8f371a.png)
 
+
+### to add compose task:
+
+![image](https://user-images.githubusercontent.com/33985509/130940979-e303295c-d0b2-44be-a1a0-f02b11c6f4bb.png)
