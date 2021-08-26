@@ -18,5 +18,8 @@ Create a Service Connection  and name the service connection
 
 For Releases :
 
+![image](https://user-images.githubusercontent.com/33985509/130936856-b179db4c-859c-4bd5-b621-cc78d7695e1a.png)
+
+
 ![image](https://user-images.githubusercontent.com/33985509/130936650-75965437-425e-42be-9f10-d4f18b8f371a.png)
 
