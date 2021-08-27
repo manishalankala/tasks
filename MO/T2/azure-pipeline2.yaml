@@ -11,6 +11,7 @@ pool:
     command: 'login'        
     
 - task: DockerCompose@0
+  displayName: Build images
   inputs:
     containerregistrytype: 'Azure Container Registry'
     dockerComposeFile: '**/docker-compose.yml'
