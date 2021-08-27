@@ -2,6 +2,9 @@ FROM ubuntu:18.04
 
 # Install system and Python dependencies
 RUN apt update
+RUN apt-get install -y apt-utils
+RUN apt-get install -y software-properties-common
+RUN apt-get install libapache2-mod-wsgi-py3 -y
 RUN apt install python3 python3-pip -y
 
 # Configure Python3 and pip as the default for your system
