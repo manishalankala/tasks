@@ -85,9 +85,9 @@ command:
 
 ## Sample test
 
-![image](https://user-images.githubusercontent.com/33985509/131354201-1886a90c-5f47-41bf-8664-90783b25ce74.png)
+![image](https://user-images.githubusercontent.com/33985509/131355493-985f1eec-7c4e-466c-a4e6-cef96b488310.png)
 
-![image](https://user-images.githubusercontent.com/33985509/131354337-81272aa1-ae26-421a-968d-6806eedaae48.png)
+![image](https://user-images.githubusercontent.com/33985509/131355658-ffb5479b-f3fd-466a-bd23-741b7a34be9f.png)
 
 
 
