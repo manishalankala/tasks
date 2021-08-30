@@ -53,7 +53,7 @@ resource "azurerm_app_service" "my_app_service_container" {
  site_config {
    scm_type  = "VSTSRM".  # or can be "LocalGit"
    always_on = "true"
-   linux_fx_version  = "DOCKER|arc01.azurecr.io/myapp:latest" 
+   linux_fx_version  = "DOCKER|acr01.azurecr.io/myapp:latest" 
    health_check_path = "/health" # health check required in order that internal app service plan loadbalancer do not loadbalance on instance down
  }
  identity {
