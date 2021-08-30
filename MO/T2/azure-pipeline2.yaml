@@ -1,6 +1,18 @@
 trigger: 
 - master
 
+
+resources:
+- repo: self
+
+variables:
+  dockerRegistryServiceConnection: 'XXXXXXXX-XXXXXX-XXXXXXXX-XXXXX-XXXXX'
+  imageRepository: 'web'
+  containerRegistry: 'lab.azurecr.io'
+  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
+  tag: '$(Build.BuildId)'
+
+
 pool:
   vmImage: ubuntu-latest
   
