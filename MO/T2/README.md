@@ -59,6 +59,17 @@ terraform apply
 
 ![image](https://user-images.githubusercontent.com/33985509/130936650-75965437-425e-42be-9f10-d4f18b8f371a.png)
 
+~~~
+subscription :
+app type:
+app service name:
+registry or namespace:
+repository:
+command:
+~~~
+
+
+
 
 ### to add compose task:
 
