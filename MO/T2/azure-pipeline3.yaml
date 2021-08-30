@@ -7,8 +7,8 @@ resources:
 
 variables:
   dockerRegistryServiceConnection: 'XXXXXXXX-XXXXXX-XXXXXXXX-XXXXX-XXXXX'
-  imageRepository: 'web'
-  containerRegistry: 'lab.azurecr.io'
+  imageRepository: 'acr01'
+  containerRegistry: 'acr01.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
 
