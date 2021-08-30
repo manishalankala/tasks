@@ -3,6 +3,8 @@
 
 ### Commands
 
+~~~
+
 az account list-locations
 
 az login
@@ -23,10 +25,10 @@ az webapp create --plan app1 --name myapp --deployment-container-image-name lab.
 
 az configure --defaults group=web location=westus
 
+~~~
 
 
-
-
+~~~
 
 terraform init
 
@@ -36,7 +38,7 @@ terraform plan
 
 terraform apply
 
-
+~~~
 
 
 
