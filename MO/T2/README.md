@@ -83,6 +83,18 @@ command:
 ![image](https://user-images.githubusercontent.com/33985509/130940979-e303295c-d0b2-44be-a1a0-f02b11c6f4bb.png)
 
 
+## Sample test
+
+![image](https://user-images.githubusercontent.com/33985509/131354201-1886a90c-5f47-41bf-8664-90783b25ce74.png)
+
+![image](https://user-images.githubusercontent.com/33985509/131354337-81272aa1-ae26-421a-968d-6806eedaae48.png)
+
+
+
+
+
+
+
 ### Errors
 
 ERROR: unauthorized: You do not have permission to download this server image. Please ensure that this server was purchased with your most recent order.
