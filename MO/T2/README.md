@@ -83,3 +83,9 @@ ERROR: unauthorized: You do not have permission to download this server image. P
 Username: maltego
 
 Password: tasx
+
+
+
+### References:
+
+https://github.com/paterva/maltego-trx
