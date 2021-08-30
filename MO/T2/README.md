@@ -7,6 +7,10 @@ az account list-locations
 
 az login
 
+az account list-locations
+
+az account set --subscription
+
 az group create --name rg --locaton westus
 
 az acr create --resource-group rg --name acr01 --sku basic
@@ -18,6 +22,7 @@ az appservice plan create --name myapp --sku F1 --is-linux
 az webapp create --plan app1 --name myapp --deployment-container-image-name lab.azurecr.o/web:$(Build.buildId)
 
 az configure --defaults group=web location=westus
+
 
 
 
