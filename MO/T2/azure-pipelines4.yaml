@@ -47,3 +47,27 @@ stages:
         dockerComposeFile: '**/docker-compose.yml'
         action: 'Run a Docker Compose command'
         dockerComposeCommand: 'up --build'
+
+
+- stage: Deploy_to_dev_environment 
+  displayName: 'Deploy to Dev'
+  dependsOn: Build
+
+  jobs:
+  - deployment: Deploy
+    displayName: Deploy
+    pool:
+      vmImage: $(vmImageName)
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: drop
+
+          - task: AzureWebApp@1
+            inputs: 
+                azureSubscription: 'XXXXXXXXXXXXXXXXXXX'
+                appName: 'app1'
+                appType: webAppLinux
+                package: '$(Pipeline.Workspace)/**/*.zip'
