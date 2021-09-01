@@ -49,8 +49,8 @@ stages:
         dockerComposeCommand: 'up --build'
 
 
-- stage: Deploy_to_dev_environment 
-  displayName: 'Deploy to Dev'
+- stage: Deploy_to_environment 
+  displayName: 'Deploy to Env'
   dependsOn: Build
 
   jobs:
@@ -71,3 +71,38 @@ stages:
                 appName: 'app1'
                 appType: webAppLinux
                 package: '$(Pipeline.Workspace)/**/*.zip'
+
+- stage: Deploy to terraform
+  display: 'via terraform'
+  jobs:
+  - deployment: Deploy_Terraform
+    pool:
+      vmImage: 'ubuntu-latest'
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - task: terraform.azure-pipelines-terraform-cli.TerraformCLI@0
+              displayName: 'terraform init'
+              inputs:
+                command: init
+                workingDirectory: 
+                backendType: azurerm
+                backendserviceArm: ''
+                backendAzureRmResourceGroupName: ''
+                backendAzureRmStorageAccountName: ''
+                backendAzureRmContainerName: ''
+                backendAzureRmkey: ''
+            - task: terraform.azure-pipelines-terraform-cli.TerraformCLI@0
+              displayName: 'terraform plan'
+              inputs:
+                command: plan
+                workingDirectory:
+                terraformVe4rsion: 0.12.49
+            - task: terraform.azure-pipelines-terraform-cli.TerraformCLI@0
+              displayName: 'terraform apply'
+              inputs:
+                command: plan
+                workingDirectory:
+                environmentServiceName: ''
+                terraformVe4rsion: 0.12.49
