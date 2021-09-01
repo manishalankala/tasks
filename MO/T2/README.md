@@ -41,7 +41,18 @@ terraform apply
 ~~~
 
 
+### YAML
+~~~
 
+resources:
+  pipelines: [ pipeline ]  
+  builds: [ build ]
+  repositories: [ repository ]
+  containers: [ container ]
+  packages: [ package ]
+  webhooks: [ webhook ]
+
+~~~
 
 ### Create a Service Connection  and name the service connection
 
