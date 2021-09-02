@@ -14,14 +14,14 @@ steps:
 - task: Docker@2
   displayName: "Docker Login to docker_registry"
   inputs:
-    containerRegistry: 'docker_registry'
+    containerRegistry: 'ACR01'
     command: 'login'
 
 
 - task: Docker@2
   displayName: "Docker Build"
   inputs:
-    containerRegistry: 'docker_registry'
+    containerRegistry: 'ACR01'
     repository: 'organizationname/reponamefrontend'
     command: 'build'
     Dockerfile: './Dockerfile'
@@ -31,7 +31,7 @@ steps:
 - task: Docker@2
   displayName: "Docker Push"
   inputs:
-    containerRegistry: 'docker_registry'
+    containerRegistry: 'ACR01'
     repository: 'organizationname/reponame'
     command: 'push'
 
