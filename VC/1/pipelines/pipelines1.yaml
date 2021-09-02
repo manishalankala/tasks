@@ -24,7 +24,7 @@ steps:
     containerRegistry: 'docker_registry'
     repository: 'organizationname/reponamefrontend'
     command: 'build'
-    Dockerfile: 'docker/Dockerfile'
+    Dockerfile: './Dockerfile'
     buildContext: '.'
 
 
@@ -32,7 +32,7 @@ steps:
   displayName: "Docker Push"
   inputs:
     containerRegistry: 'docker_registry'
-    repository: 'organizationname/reponamefrontend'
+    repository: 'organizationname/reponame'
     command: 'push'
 
 
@@ -41,7 +41,7 @@ steps:
   displayName: Build an image
   inputs:
     containerRegistry: 'ACR01'
-    repository: '$(imageRepo)'
+    repository: 'app'
     command: 'buildAndPush'
     Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
     tags: |
