@@ -16,7 +16,7 @@ resources:
 
 
 parameters:
-- name: env
+- name: environment
   displayName: Environment
   type: string
   default: ['dev','test', 'prod']
