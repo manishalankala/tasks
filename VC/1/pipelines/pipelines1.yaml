@@ -54,6 +54,11 @@ steps:
     command: 'push'
 
 
+########################
+## K8s config
+########################
+
+
 - task: Bash@3
   displayName: "Set tag version in K8S configuration"
   inputs:
@@ -74,6 +79,11 @@ steps:
   inputs:
     targetType: 'inline'
     script: 'sed -i "s/\:latest/\:$(Build.BuildId)/g; s/\:fixed-latest/\:latest/g" $(System.DefaultWorkingDirectory)/k8s/prod-deployment.yaml'
+
+
+########################
+## 
+########################
 
 
 - task: CopyFiles@2
