@@ -90,6 +90,11 @@ steps:
     ArtifactName: 'artifact'
     publishLocation: 'Container'
 
+
+########################
+## K8s Manifest
+########################
+
 - task: KubernetesManifest@0
   displayName: "k8s manifest"
   inputs:
