@@ -6,36 +6,17 @@ pool:
 
 #variables:
 #  imageName: 'pipelines-ns-docker'
+
+
 steps:
-
-- task: Bash@3
-  displayName: "Npm install"
-  inputs:
-    targetType: 'inline'
-    script: |
-      # Install Dependencies
-      sudo apt install ffmpeg
-      npm install
-
-- task: Bash@3
-  displayName: "Npm run sync content"
-  inputs:
-    targetType: 'inline'
-    script: 'npm run sync:content'
-
-
-- task: Bash@3
-  displayName: "Npm build"
-  inputs:
-    targetType: 'inline'
-    script: 'npm run build'
 
     
 - task: Docker@2
-  displayName: "Docker Login to otc_docker_registry"
+  displayName: "Docker Login to docker_registry"
   inputs:
-    containerRegistry: 'otc_docker_registry'
+    containerRegistry: 'docker_registry'
     command: 'login'
+
 
 - task: Docker@2
   displayName: "Docker Build Nginx1.19.10-alpine as Frontend"
@@ -45,6 +26,7 @@ steps:
     command: 'build'
     Dockerfile: 'docker/Dockerfile'
     buildContext: '.'
+
 
 - task: Docker@2
   displayName: "Docker Push Nginx1.19.10-alpine as Frontend"
