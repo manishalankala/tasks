@@ -1,1 +1,86 @@
+trigger:
+  branches:
+    include:
+      - master
+      - feature/*
 
+resources:
+- repo: self
+
+
+parameters:
+- name: environments
+  type: object
+  default: ['dev','qa', 'prod']
+
+
+variables:
+  imageRepo: app
+  tag: '$(Build.BuildId)'
+  kubernetesServiceConnection: 'clusterdev-sc'
+  kubernetesServiceConnection: 'clustertest-sc'
+  kubernetesServiceConnection: 'clusterprod-sc'
+
+
+
+stages:
+- stage: Build
+  displayName: Build image
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: Docker@2
+      displayName: Build an image
+      inputs:
+        containerRegistry: 'ACR01'
+        repository: '$(imageRepo)'
+        command: 'buildAndPush'
+        Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+        tags: |
+          $(tag)
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Pipeline.Workspace)/k8s'
+        artifact: 'manifests'
+        publishLocation: 'pipeline'
+
+
+- stage: Deploy
+  displayName: Deploy to Dev
+  dependsOn: Build
+  variables:
+    acrsecret: 
+    acrdevurl: 'ACR01.azurecr.io'
+    replicaNo: 3
+  jobs:
+  - deployment: Deploy
+    displayName: Deploy to AKS
+    environment: 'k8sdev.default'
+    pool: 
+      vmImage: ubuntu-latest
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              buildType: 'current'
+              artifactName: 'manifests'
+              targetPath: '$(Pipeline.Workspace)/manifests'
+          - task: KubernetesManifest@0
+            inputs:
+              action: 'createSecret'
+              namespace: 'default'
+              secretType: 'dockerRegistry'
+              secretName: '$(acrsecret)'
+              dockerRegistryEndpoint: 'K8SExamplesACR'
+          - task: KubernetesManifest@0
+            inputs:
+              action: 'deploy'
+              namespace: 'default'
+              manifests: |
+                $(Pipeline.Workspace)/manifests/deployment.yml
+              containers: '$(acrdevurl)/$(imageRepo):$(tag)'
