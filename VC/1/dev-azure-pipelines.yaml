@@ -14,9 +14,9 @@ parameters:
 variables:
   imageRepo: app
   tag: '$(Build.BuildId)'
-  kubernetesServiceConnection: clusterdev
-  kubernetesServiceConnection: clustertest
-  kubernetesServiceConnection: clusterprod
+  kubernetesServiceConnection: 'clusterdev-sc'
+  kubernetesServiceConnection: 'clustertest-sc'
+  kubernetesServiceConnection: 'clusterprod-sc'
 
 
 
