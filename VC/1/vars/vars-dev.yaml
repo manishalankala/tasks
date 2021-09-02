@@ -1,5 +1,6 @@
 variables:
-  pythonVersion: "3.8"
+  pythonVersion: "3.6"
   vmImageName: "ubuntu-latest"
   resourceGroup: "dev-resource-group"
   location: "westus"
+  
