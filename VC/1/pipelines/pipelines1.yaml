@@ -1,11 +1,13 @@
-trigger: 
-- master
+trigger:
+  branches:
+    include:
+      - master
+      - feature/*
 
 pool:
   vmImage: ubuntu-latest
 
-#variables:
-#  imageName: 'pipelines-ns-docker'
+
 
 
 steps:
