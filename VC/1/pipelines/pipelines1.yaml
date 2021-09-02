@@ -78,8 +78,14 @@ steps:
 
 
 ########################
-## 
+## Publish manifest as Artifact
 ########################
+
+#- task: DownloadPipelineArtifact@2
+#  inputs:
+#    buildType: 'current'
+#    artifactName: 'manifests'
+#    targetPath: '$(Pipeline.Workspace)/manifests'
 
 
 - task: CopyFiles@2
