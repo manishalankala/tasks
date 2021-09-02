@@ -12,12 +12,20 @@ pool:
 
 steps:
 
-    
 - task: Docker@2
   displayName: "Login to ACR"
   inputs:
     containerRegistry: 'ACR01'
     command: 'login'
+
+- task: DownloadPipelineArtifact@2
+  displayName: Download Pipeline artifacts
+  inputs:
+  buildType: 'current'
+  artifactName: 'manifests-docker'
+  itemPattern: |
+            Dockerfile
+  targetPath: '$(Pipeline.Workspace)/manifests-docker'
 
 
 - task: Docker@2
