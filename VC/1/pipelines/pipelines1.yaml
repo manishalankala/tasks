@@ -58,14 +58,14 @@ steps:
   displayName: "Set tag version in K8S configuration"
   inputs:
     targetType: 'inline'
-    script: 'sed -i "s/\:latest/\:$(Build.BuildId)/g; s/\:fixed-latest/\:latest/g" $(System.DefaultWorkingDirectory)/k8s/devdeployment.yaml'
+    script: 'sed -i "s/\:latest/\:$(Build.BuildId)/g; s/\:fixed-latest/\:latest/g" $(System.DefaultWorkingDirectory)/k8s/dev-deployment.yaml'
     
 
 - task: Bash@3
   displayName: "Set tag version in K8S configuration"
   inputs:
     targetType: 'inline'
-    script: 'sed -i "s/\:latest/\:$(Build.BuildId)/g; s/\:fixed-latest/\:latest/g" $(System.DefaultWorkingDirectory)/k8s/testdeployment.yaml'
+    script: 'sed -i "s/\:latest/\:$(Build.BuildId)/g; s/\:fixed-latest/\:latest/g" $(System.DefaultWorkingDirectory)/k8s/test-deployment.yaml'
 
 
 
@@ -73,7 +73,7 @@ steps:
   displayName: "Set tag version in K8S configuration"
   inputs:
     targetType: 'inline'
-    script: 'sed -i "s/\:latest/\:$(Build.BuildId)/g; s/\:fixed-latest/\:latest/g" $(System.DefaultWorkingDirectory)/k8s-deploy/proddeployment.yaml'
+    script: 'sed -i "s/\:latest/\:$(Build.BuildId)/g; s/\:fixed-latest/\:latest/g" $(System.DefaultWorkingDirectory)/k8s/prod-deployment.yaml'
 
 
 - task: CopyFiles@2
@@ -96,4 +96,21 @@ steps:
     action: 'deploy'
     kubernetesServiceConnection: 'clusterdev-sc'
     namespace: 'default'
-    manifests: 'k8s-deploy/devdeployment.yaml'
+    manifests: 'k8s/dev-deployment.yaml'
+
+
+- task: KubernetesManifest@0
+  displayName: "k8s manifest"
+  inputs:
+    action: 'deploy'
+    kubernetesServiceConnection: 'clustertest-sc'
+    namespace: 'default'
+    manifests: 'k8s/test-deployment.yaml'
+    
+- task: KubernetesManifest@0
+  displayName: "k8s manifest"
+  inputs:
+    action: 'deploy'
+    kubernetesServiceConnection: 'clusterprod-sc'
+    namespace: 'default'
+    manifests: 'k8s/prod-deployment.yaml'
