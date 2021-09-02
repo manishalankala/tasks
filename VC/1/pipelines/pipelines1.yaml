@@ -7,6 +7,9 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  vmImageName: 'ubuntu-latest'
+  IMAGE_TAG: '$(Build.BuildId)'
 
 
 
