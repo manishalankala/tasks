@@ -1,6 +1,7 @@
 https://digital.ai/periodic-table-of-devops-tools
 
 
+~~~
 
 az login
 az account show --query tenantId -o tsv                                             # TENANT_ID
@@ -15,6 +16,6 @@ TFSTATE_STORAGE_ACCOUNT_KEY=$(az storage account keys list -g tfstate-rg-dev --a
 az storage container create -n tfstate-blob-dev --account-name tfstate-store-dev --account-key $TFSTATE_STORAGE_ACCOUNT_KEY
 az group lock create --lock-type CanNotDelete -n CanNotDelete -g tfstate-rg-dev
 
-
+~~~
 
 
