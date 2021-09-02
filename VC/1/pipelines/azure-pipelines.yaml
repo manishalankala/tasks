@@ -9,9 +9,10 @@ resources:
 
 
 parameters:
-- name: environments
-  type: object
-  default: ['dev','qa', 'prod']
+- name: env
+  displayName: Environment
+  type: string
+  default: ['dev','test', 'prod']
 
 
 variables:
