@@ -13,6 +13,7 @@ pool:
 steps:
 
 - task: AzureKeyVault@1
+  displayName: 'Get Credentials'
   inputs:
     azureSubscription: 'XXXXXXXXXX'   ## $(ServiceConnection) or [Subscription Name]([Subscription ID])
     KeyVaultName: 'vault01'
