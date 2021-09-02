@@ -1,19 +1,19 @@
 apiVersion : apps/v1
 kind: Deployment
 metadata:
-  name: sampleapp 
+  name: dev-app 
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: sampleapp
+      app: dev-app
   template:
     metadata:
       labels:
-        app: sampleapp 
+        app: dev-app 
     spec:
       containers:
-        - name: sampleapp 
+        - name: dev-app-image
           image: ACR01.azurecr.io/sampleapp
           imagePullPolicy: Always
           ports:
@@ -34,4 +34,4 @@ spec:
     - port: 80
       targetPort: 80
     selector:
-        app: app
+        app: dev-app 
