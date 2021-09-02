@@ -7,6 +7,13 @@ trigger:
 resources:
 - repo: self
 
+#resources:
+#  repositories:
+#    - repository: templates
+#      type: git
+#      name: vc/templates
+#      ref: refs/heads/master
+
 
 parameters:
 - name: env
