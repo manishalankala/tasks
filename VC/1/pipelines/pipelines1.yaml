@@ -1,1 +1,99 @@
+trigger: 
+- master
 
+pool:
+  vmImage: ubuntu-latest
+
+#variables:
+#  imageName: 'pipelines-ns-docker'
+steps:
+
+- task: Bash@3
+  displayName: "Npm install"
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Install Dependencies
+      sudo apt install ffmpeg
+      npm install
+
+- task: Bash@3
+  displayName: "Npm run sync content"
+  inputs:
+    targetType: 'inline'
+    script: 'npm run sync:content'
+
+
+- task: Bash@3
+  displayName: "Npm build"
+  inputs:
+    targetType: 'inline'
+    script: 'npm run build'
+
+    
+- task: Docker@2
+  displayName: "Docker Login to otc_docker_registry"
+  inputs:
+    containerRegistry: 'otc_docker_registry'
+    command: 'login'
+
+- task: Docker@2
+  displayName: "Docker Build Nginx1.19.10-alpine as Frontend"
+  inputs:
+    containerRegistry: 'docker_registry'
+    repository: 'organizationname/reponamefrontend'
+    command: 'build'
+    Dockerfile: 'docker/Dockerfile'
+    buildContext: '.'
+
+- task: Docker@2
+  displayName: "Docker Push Nginx1.19.10-alpine as Frontend"
+  inputs:
+    containerRegistry: 'docker_registry'
+    repository: 'organizationname/reponamefrontend'
+    command: 'push'
+
+
+- task: Bash@3
+  displayName: "Set tag version in K8S configuration"
+  inputs:
+    targetType: 'inline'
+    script: 'sed -i "s/\:latest/\:$(Build.BuildId)/g; s/\:fixed-latest/\:latest/g" $(System.DefaultWorkingDirectory)/k8s/devdeployment.yaml'
+    
+
+- task: Bash@3
+  displayName: "Set tag version in K8S configuration"
+  inputs:
+    targetType: 'inline'
+    script: 'sed -i "s/\:latest/\:$(Build.BuildId)/g; s/\:fixed-latest/\:latest/g" $(System.DefaultWorkingDirectory)/k8s/testdeployment.yaml'
+
+
+
+- task: Bash@3
+  displayName: "Set tag version in K8S configuration"
+  inputs:
+    targetType: 'inline'
+    script: 'sed -i "s/\:latest/\:$(Build.BuildId)/g; s/\:fixed-latest/\:latest/g" $(System.DefaultWorkingDirectory)/k8s-deploy/proddeployment.yaml'
+
+
+- task: CopyFiles@2
+  displayName: "Copy Kubernetes Manifest"
+  inputs:
+    sourceFolder: $(System.DefaultWorkingDirectory)/k8s-deploy/
+    contents: '**'
+    targetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  displayName: "Publish Artifact"
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'artifact'
+    publishLocation: 'Container'
+
+- task: KubernetesManifest@0
+  displayName: "k8s manifest"
+  inputs:
+    action: 'deploy'
+    kubernetesServiceConnection: 'clusterdev-sc'
+    namespace: 'default'
+    manifests: 'k8s-deploy/devdeployment.yaml'
