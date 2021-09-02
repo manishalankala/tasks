@@ -15,17 +15,23 @@ spec:
       containers:
         - name: sampleapp 
           image: ACR01.azurecr.io/sampleapp
+          imagePullPolicy: Always
           ports:
-          - containerPort: 80         
+          - containerPort: 80 
+      imagePullSecrets:
+      - name: dockerpullsecret
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
-    name: sampleapp
+    name: app-service
+    labels:
+      app: app-service
 spec:
     type: LoadBalancer
     ports:
-    - port: 80 
+    - port: 80
+      targetPort: 80
     selector:
-        app: sampleapp
+        app: app
