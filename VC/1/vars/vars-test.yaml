@@ -1,1 +1,6 @@
 
+variables:
+  pythonVersion: "3.8"
+  vmImageName: "ubuntu-latest"
+  resourceGroup: "test-resource-group"
+  location: "westus"
