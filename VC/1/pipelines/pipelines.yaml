@@ -1,0 +1,17 @@
+
+
+stages:
+- stage: dev
+  displayName: 'dev build'
+  jobs:
+  - job: build
+    variables:
+      - template: .\vars\vars-dev.yaml@templates
+    steps:
+      - template: .\pipelines\pipelines.yaml
+        parameters:
+          terraformVersion: $(terraformVersion)
+          backendAzureRmResourceGroupName: $(backendAzureRmResourceGroupName)
+          backendAzureRmStorageAccountName: $(backendAzureRmStorageAccountName)
+          backendAzureRmContainerName: $(backendAzureRmContainerName)
+          backendAzureRmKey: $(backendAzureRmKey)
