@@ -1,8 +1,14 @@
 trigger:
-- main
+- master
 
 resources:
 - repo: self
+
+
+parameters:
+- name: environments
+  type: object
+  default: ['dev','qa', 'prod']
 
 
 variables:
