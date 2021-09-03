@@ -151,7 +151,7 @@ stages:
    steps:
    
    - task: AzureKeyVault@1
-     displayName: Fetch secrets from Azure Key vault
+     displayName: Connection to Shared Azure Key Vault
      inputs:
        azureSubscription: 'XXXXXXXX'
        KeyVaultName: 'vault02'
