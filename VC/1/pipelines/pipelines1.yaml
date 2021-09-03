@@ -154,7 +154,7 @@ stages:
      displayName: Connection to Shared Azure Key Vault
      inputs:
        azureSubscription: 'XXXXXXXX'
-       KeyVaultName: 'vault02'
+       KeyVaultName: 'shared-dev-vault01'
        SecretsFilter: '*'
    
    - task: KubernetesManifest@0
@@ -165,6 +165,15 @@ stages:
        kubernetesServiceConnection: 'clusterdev-sc'
        namespace: 'default'
        manifests: 'k8s/dev-deployment.yaml'
+ 
+ 
+ 
+   - task: AzureKeyVault@1
+     displayName: Connection to Shared Azure Key Vault
+     inputs:
+       azureSubscription: 'XXXXXXXX'
+       KeyVaultName: 'shared-test-vault01'
+       SecretsFilter: '*'        
    - task: KubernetesManifest@0
      displayName: "k8s manifest"
      environment: 'test.default'        ##Target a specific resource within an environment from deployment job
@@ -173,7 +182,15 @@ stages:
        kubernetesServiceConnection: 'clustertest-sc'
        namespace: 'default'
        manifests: 'k8s/test-deployment.yaml'
-    
+       
+       
+       
+   - task: AzureKeyVault@1
+     displayName: Connection to Shared Azure Key Vault
+     inputs:
+       azureSubscription: 'XXXXXXXX'
+       KeyVaultName: 'shared-prod-vault01'
+       SecretsFilter: '*'
   - task: KubernetesManifest@0
     displayName: "k8s manifest"
     environment: 'test.default'        ##Target a specific resource within an environment from deployment job
