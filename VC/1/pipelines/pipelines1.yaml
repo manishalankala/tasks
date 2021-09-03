@@ -29,6 +29,13 @@ stages:
      inputs:
        containerRegistry: 'ACR01'
        command: 'login'
+   - task: AzureKeyVault@1
+     displayName: 'Get Credentials'
+     inputs:
+       azureSubscription: 'XXXXXXXXXX'   ## $(ServiceConnection) or [Subscription Name]([Subscription ID])
+       KeyVaultName: 'vault01'
+       SecretsFilter: 'MySecret'
+       RunAsPreJob: false
    - task: Docker@2
      displayName: Build an image
      inputs:
@@ -39,17 +46,11 @@ stages:
        tags: |
          1.0.$(Build.BuildId)
          latest
-   - task: AzureKeyVault@1
-     displayName: 'Get Credentials'
-     inputs:
-       azureSubscription: 'XXXXXXXXXX'   ## $(ServiceConnection) or [Subscription Name]([Subscription ID])
-       KeyVaultName: 'vault01'
-       SecretsFilter: 'MySecret'
-       RunAsPreJob: false
+
 
 
 ####################
-## Stage - build - alternative
+## Stage - build - Alternative
 #####################
 
 
@@ -88,26 +89,27 @@ stages:
 ########################
 
 
-- task: Bash@3
-  displayName: "Set tag version in K8S configuration"
-  inputs:
-    targetType: 'inline'
-    script: 'sed -i "s/\:latest/\:$(Build.BuildId)/g; s/\:fixed-latest/\:latest/g" $(System.DefaultWorkingDirectory)/k8s/dev-deployment.yaml'
-    
-
-- task: Bash@3
-  displayName: "Set tag version in K8S configuration"
-  inputs:
-    targetType: 'inline'
-    script: 'sed -i "s/\:latest/\:$(Build.BuildId)/g; s/\:fixed-latest/\:latest/g" $(System.DefaultWorkingDirectory)/k8s/test-deployment.yaml'
-
-
-
-- task: Bash@3
-  displayName: "Set tag version in K8S configuration"
-  inputs:
-    targetType: 'inline'
-    script: 'sed -i "s/\:latest/\:$(Build.BuildId)/g; s/\:fixed-latest/\:latest/g" $(System.DefaultWorkingDirectory)/k8s/prod-deployment.yaml'
+- stage: mid-stage
+  displayName: mid-stage
+  dependsOn: Build
+  jobs: 
+  - job: Build 
+   steps:
+   - task: Bash@3
+     displayName: "Set tag version in K8S configuration"
+     inputs:
+       targetType: 'inline'
+       script: 'sed -i "s/\:latest/\:$(Build.BuildId)/g; s/\:fixed-latest/\:latest/g" $(System.DefaultWorkingDirectory)/k8s/dev-deployment.yaml'
+   - task: Bash@3
+     displayName: "Set tag version in K8S configuration"
+     inputs:
+       targetType: 'inline'
+       script: 'sed -i "s/\:latest/\:$(Build.BuildId)/g; s/\:fixed-latest/\:latest/g" $(System.DefaultWorkingDirectory)/k8s/test-deployment.yaml'
+  - task: Bash@3
+    displayName: "Set tag version in K8S configuration"
+    inputs:
+      targetType: 'inline'
+      script: 'sed -i "s/\:latest/\:$(Build.BuildId)/g; s/\:fixed-latest/\:latest/g" $(System.DefaultWorkingDirectory)/k8s/prod-deployment.yaml'
 
 
 ########################
@@ -121,46 +123,50 @@ stages:
 #    targetPath: '$(Pipeline.Workspace)/manifests'
 
 
-- task: CopyFiles@2
-  displayName: "Copy Kubernetes Manifest"
-  inputs:
-    sourceFolder: $(System.DefaultWorkingDirectory)/k8s/
-    contents: '**'
-    targetFolder: '$(Build.ArtifactStagingDirectory)'
+  - task: CopyFiles@2
+    displayName: "Copy Kubernetes Manifest"
+    inputs:
+      sourceFolder: $(System.DefaultWorkingDirectory)/k8s/
+      contents: '**'
+      targetFolder: '$(Build.ArtifactStagingDirectory)'
 
-- task: PublishBuildArtifacts@1
-  displayName: "Publish Artifact"
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'artifact'
-    publishLocation: 'Container'
+  - task: PublishBuildArtifacts@1
+    displayName: "Publish Artifact"
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: 'artifact'
+      publishLocation: 'Container'
 
 
 ########################
 ## K8s Manifest
 ########################
 
-- task: KubernetesManifest@0
-  displayName: "k8s manifest"
-  inputs:
-    action: 'deploy'
-    kubernetesServiceConnection: 'clusterdev-sc'
-    namespace: 'default'
-    manifests: 'k8s/dev-deployment.yaml'
-
-
-- task: KubernetesManifest@0
-  displayName: "k8s manifest"
-  inputs:
-    action: 'deploy'
-    kubernetesServiceConnection: 'clustertest-sc'
-    namespace: 'default'
-    manifests: 'k8s/test-deployment.yaml'
+- stage: Deploy
+  displayName: Deploy stage
+  dependsOn: mid-stage
+  jobs:
+  - job: Build 
+   steps:
+   - task: KubernetesManifest@0
+     displayName: "k8s manifest"
+     inputs:
+       action: 'deploy'
+       kubernetesServiceConnection: 'clusterdev-sc'
+       namespace: 'default'
+       manifests: 'k8s/dev-deployment.yaml'
+   - task: KubernetesManifest@0
+     displayName: "k8s manifest"
+     inputs:
+       action: 'deploy'
+       kubernetesServiceConnection: 'clustertest-sc'
+       namespace: 'default'
+       manifests: 'k8s/test-deployment.yaml'
     
-- task: KubernetesManifest@0
-  displayName: "k8s manifest"
-  inputs:
-    action: 'deploy'
-    kubernetesServiceConnection: 'clusterprod-sc'
-    namespace: 'default'
-    manifests: 'k8s/prod-deployment.yaml'
+  - task: KubernetesManifest@0
+    displayName: "k8s manifest"
+    inputs:
+      action: 'deploy'
+      kubernetesServiceConnection: 'clusterprod-sc'
+      namespace: 'default'
+      manifests: 'k8s/prod-deployment.yaml'
