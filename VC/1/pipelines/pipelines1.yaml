@@ -10,6 +10,7 @@ pool:
 variables:
   vmImageName: 'ubuntu-latest'
   IMAGE_TAG: '$(Build.BuildId)'
+  AzureSubscription: 'AzureServiceConnection' # Name of the Service Connection
 
 
 ####################
@@ -150,6 +151,7 @@ stages:
    steps:
    - task: KubernetesManifest@0
      displayName: "k8s manifest"
+     environment: 'dev.default'          ##Target a specific resource within an environment from deployment job
      inputs:
        action: 'deploy'
        kubernetesServiceConnection: 'clusterdev-sc'
@@ -157,6 +159,7 @@ stages:
        manifests: 'k8s/dev-deployment.yaml'
    - task: KubernetesManifest@0
      displayName: "k8s manifest"
+     environment: 'test.default'        ##Target a specific resource within an environment from deployment job
      inputs:
        action: 'deploy'
        kubernetesServiceConnection: 'clustertest-sc'
@@ -165,6 +168,7 @@ stages:
     
   - task: KubernetesManifest@0
     displayName: "k8s manifest"
+    environment: 'test.default'        ##Target a specific resource within an environment from deployment job
     inputs:
       action: 'deploy'
       kubernetesServiceConnection: 'clusterprod-sc'
