@@ -149,6 +149,14 @@ stages:
   jobs:
   - job: Deploy-job
    steps:
+   
+   - task: AzureKeyVault@1
+     displayName: Fetch secrets from Azure Key vault
+     inputs:
+       azureSubscription: 'XXXXXXXX'
+       KeyVaultName: 'vault02'
+       SecretsFilter: '*'
+   
    - task: KubernetesManifest@0
      displayName: "k8s manifest"
      environment: 'dev.default'          ##Target a specific resource within an environment from deployment job
