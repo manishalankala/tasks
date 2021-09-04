@@ -23,12 +23,18 @@ parameters:
 
 
 variables:
+  isMaster: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
+  - group: azure-dev
+  - group: azure-test
+  - group: azure-prod
+  vmImageName: 'ubuntu-latest'
+  IMAGE_TAG: '$(Build.BuildId)'
+  AzureSubscription: 'AzureServiceConnection' # Name of the Service Connection
   imageRepo: app
   tag: '$(Build.BuildId)'
   kubernetesServiceConnection: 'clusterdev-sc'
   kubernetesServiceConnection: 'clustertest-sc'
   kubernetesServiceConnection: 'clusterprod-sc'
-
 
 
 stages:
