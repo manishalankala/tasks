@@ -1,0 +1,355 @@
+trigger:
+- none
+
+
+#trigger:
+#  batch: true 
+#  branches:
+#    include:
+#      - dev
+#      - test
+#      - prod
+
+
+#trigger:
+#  branches:
+#    include:
+#      - master
+#      - feature/*
+
+
+variables:
+  isMaster: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
+  - group: azure-dev
+  - group: azure-test
+  - group: azure-prod
+  vmImageName: 'ubuntu-latest'
+  IMAGE_TAG: '$(Build.BuildId)'
+  AzureSubscription: 'AzureServiceConnection' # Name of the Service Connection
+
+pool:
+  vmImage: ubuntu-latest
+
+
+stages :
+
+#########################
+## Stage: terraform-dev
+#########################
+  - stage: terraformdev
+    jobs:
+    - job: terraformdev
+      continueOnError: false
+      steps:
+      - task: TerraformInstaller@0
+        displayName: 'install'
+        inputs:
+          terraformVersion: '0.12.49'
+      - task: TerraformTaskV1@0
+        displayName: 'init'
+        inputs:
+          provider: 'azurerm'
+          command: 'init'
+          backendServiceArm: 'az-dev-sc'
+          backendAzureRmResourceGroupName: 'tf-backend-rg-dev'
+          backendAzureRmStorageAccountName: 'tf-backend-store-dev'
+          backendAzureRmContainerName: 'tf-backend-con-dev'
+          backendAzureRmKey: 'terraformdev.tfstate'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/' 
+      - task: TerraformTaskV1@0
+        displayName: 'validate'
+        inputs:
+          provider: 'azurerm'
+          command: 'validate'
+      - task: TerraformTaskV1@0
+        displayName: 'plan'
+        inputs:
+          provider: 'azurerm'
+          command: 'plan'
+          commandOptions: '-input=false -var-file="../vars/dev.tfvars"'
+          environmentServiceNameAzureRM: 'az-dev-sc'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
+      - task: TerraformTaskV1@0
+        displayName: 'apply'
+        inputs:
+          provider: 'azurerm'
+          command: 'apply'
+          commandOptions: '-input=false -auto-approve -var-file="../vars/dev.tfvars"'
+          environmentServiceNameAzureRM: 'az-dev-sc'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
+
+#########################
+## Stage: terraform-test
+#########################
+
+  - stage: terraformtest
+    jobs:
+    - job: terraformtest
+      continueOnError: false
+      steps:
+      - task: TerraformInstaller@0
+        displayName: 'install'
+        inputs:
+          terraformVersion: '0.12.49'
+      - task: TerraformTaskV1@0
+        displayName: 'init'
+        inputs:
+          provider: 'azurerm'
+          command: 'init'
+          backendServiceArm: 'az-test-sc'
+          backendAzureRmResourceGroupName: 'tf-backend-rg-test'
+          backendAzureRmStorageAccountName: 'tf-backend-store-test'
+          backendAzureRmContainerName: 'tf-backend-con-test'
+          backendAzureRmKey: 'terraformtest.tfstate'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/' 
+      - task: TerraformTaskV1@0
+        displayName: 'validate'
+        inputs:
+          provider: 'azurerm'
+          command: 'validate'
+      - task: TerraformTaskV1@0
+        displayName: 'plan'
+        inputs:
+          provider: 'azurerm'
+          command: 'plan'
+          commandOptions: '-input=false -var-file="../vars/test.tfvars"'
+          environmentServiceNameAzureRM: 'az-test-sc'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
+      - task: TerraformTaskV1@0
+        displayName: 'apply'
+        inputs:
+          provider: 'azurerm'
+          command: 'apply'
+          commandOptions: '-input=false -auto-approve -var-file="../vars/test.tfvars"'
+          environmentServiceNameAzureRM: 'az-test-sc'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
+
+#########################
+## Stage: terraform-dev
+#########################
+
+  - stage: terraformprod
+    jobs:
+    - job: terraformprod
+      continueOnError: false
+      steps:
+      - task: TerraformInstaller@0
+        displayName: 'install'
+        inputs:
+          terraformVersion: '0.12.49'
+      - task: TerraformTaskV1@0
+        displayName: 'init'
+        inputs:
+          provider: 'azurerm'
+          command: 'init'
+          backendServiceArm: 'az-prod-sc'
+          backendAzureRmResourceGroupName: 'tf-backend-rg-prod'
+          backendAzureRmStorageAccountName: 'tf-backend-store-prod'
+          backendAzureRmContainerName: 'tf-backend-con-prod'
+          backendAzureRmKey: 'terraformprod.tfstate'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/' 
+      - task: TerraformTaskV1@0
+        displayName: 'validate'
+        inputs:
+          provider: 'azurerm'
+          command: 'validate'
+      - task: TerraformTaskV1@0
+        displayName: 'plan'
+        inputs:
+          provider: 'azurerm'
+          command: 'plan'
+          commandOptions: '-input=false -var-file="../vars/prod.tfvars"'
+          environmentServiceNameAzureRM: 'az-prod-sc'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
+      - task: TerraformTaskV1@0
+        displayName: 'apply'
+        inputs:
+          provider: 'azurerm'
+          command: 'apply'
+          commandOptions: '-input=false -auto-approve -var-file="../vars/prod.tfvars"'
+          environmentServiceNameAzureRM: 'az-prod-sc'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
+
+
+
+####################
+## Stage - build
+#####################
+
+   - stage: Build
+     displayName: Build stage
+     jobs: 
+     - job: Build-job
+      steps:
+      - task: Docker@2
+        displayName: "Login to ACR"
+        inputs:
+        containerRegistry: 'ACR01'
+        command: 'login'
+     - task: AzureKeyVault@1
+       displayName: 'Get Credentials'
+       inputs:
+         azureSubscription: 'XXXXXXXXXX'   ## $(ServiceConnection) or [Subscription Name]([Subscription ID])
+         KeyVaultName: 'vault01'
+         SecretsFilter: 'MySecret'
+         RunAsPreJob: false
+     - task: Docker@2
+       displayName: Build an image
+       inputs:
+         containerRegistry: 'ACR01'
+         repository: 'app'
+         command: 'buildAndPush'
+         Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+         tags: |
+           1.0.$(Build.BuildId)
+           latest
+           
+           
+####################
+## Stage - build - Alternative
+#####################
+
+
+#- task: Docker@2
+#  displayName: "Docker Build"
+#  inputs:
+#    containerRegistry: 'ACR01'
+#    repository: 'organizationname/reponamefrontend'
+#    command: 'build'
+#    Dockerfile: './Dockerfile'
+#    buildContext: '.'
+
+
+#- task: Docker@2
+#  displayName: "Docker Push"
+#  inputs:
+#    containerRegistry: 'ACR01'
+#    repository: 'organizationname/reponame'
+#    command: 'push'
+
+#- task: DownloadPipelineArtifact@2
+#  displayName: Download Pipeline artifacts
+# inputs:
+#  buildType: 'current'
+#  artifactName: 'manifests-docker'
+#  itemPattern: |
+#            Dockerfile
+#  targetPath: '$(Pipeline.Workspace)/manifests-docker'
+           
+           
+
+########################
+## K8s config
+########################
+
+
+- stage: mid-stage
+  displayName: mid-stage
+  dependsOn: Build
+  jobs: 
+  - job: mid-job
+   steps:
+   - task: Bash@3
+     displayName: "Set tag version in K8S configuration"
+     inputs:
+       targetType: 'inline'
+       script: 'sed -i "s/\:latest/\:$(Build.BuildId)/g; s/\:fixed-latest/\:latest/g" $(System.DefaultWorkingDirectory)/k8s/dev-deployment.yaml'
+   - task: Bash@3
+     displayName: "Set tag version in K8S configuration"
+     inputs:
+       targetType: 'inline'
+       script: 'sed -i "s/\:latest/\:$(Build.BuildId)/g; s/\:fixed-latest/\:latest/g" $(System.DefaultWorkingDirectory)/k8s/test-deployment.yaml'
+  - task: Bash@3
+    displayName: "Set tag version in K8S configuration"
+    inputs:
+      targetType: 'inline'
+      script: 'sed -i "s/\:latest/\:$(Build.BuildId)/g; s/\:fixed-latest/\:latest/g" $(System.DefaultWorkingDirectory)/k8s/prod-deployment.yaml'
+           
+
+########################
+## Publish manifest as Artifact
+########################
+
+#- task: DownloadPipelineArtifact@2
+#  inputs:
+#    buildType: 'current'
+#    artifactName: 'manifests'
+#    targetPath: '$(Pipeline.Workspace)/manifests'
+
+
+  - task: CopyFiles@2
+    displayName: "Copy Kubernetes Manifest"
+    inputs:
+      sourceFolder: $(System.DefaultWorkingDirectory)/k8s/
+      contents: '**'
+      targetFolder: '$(Build.ArtifactStagingDirectory)'
+
+  - task: PublishBuildArtifacts@1
+    displayName: "Publish Artifact"
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: 'artifact'
+      publishLocation: 'Container'
+
+
+
+########################
+## K8s Manifest
+########################
+
+- stage: Deploy
+  displayName: Deploy stage
+  dependsOn: mid-stage
+  jobs:
+  - job: Deploy-job
+   steps:
+   
+   - task: AzureKeyVault@1
+     displayName: Connection to Shared Azure Key Vault
+     inputs:
+       azureSubscription: 'XXXXXXXX'
+       KeyVaultName: 'shared-dev-vault01'
+       SecretsFilter: '*'
+   
+   - task: KubernetesManifest@0
+     displayName: "k8s manifest"
+     environment: 'dev.default'          ##Target a specific resource within an environment from deployment job
+     inputs:
+       action: 'deploy'
+       kubernetesServiceConnection: 'clusterdev-sc'
+       namespace: 'default'
+       manifests: 'k8s/dev-deployment.yaml'
+ 
+ 
+ 
+   - task: AzureKeyVault@1
+     displayName: Connection to Shared Azure Key Vault
+     inputs:
+       azureSubscription: 'XXXXXXXX'
+       KeyVaultName: 'shared-test-vault01'
+       SecretsFilter: '*'        
+   - task: KubernetesManifest@0
+     displayName: "k8s manifest"
+     environment: 'test.default'        ##Target a specific resource within an environment from deployment job
+     inputs:
+       action: 'deploy'
+       kubernetesServiceConnection: 'clustertest-sc'
+       namespace: 'default'
+       manifests: 'k8s/test-deployment.yaml'
+       
+       
+       
+   - task: AzureKeyVault@1
+     displayName: Connection to Shared Azure Key Vault
+     inputs:
+       azureSubscription: 'XXXXXXXX'
+       KeyVaultName: 'shared-prod-vault01'
+       SecretsFilter: '*'
+  - task: KubernetesManifest@0
+    displayName: "k8s manifest"
+    environment: 'test.default'        ##Target a specific resource within an environment from deployment job
+    inputs:
+      action: 'deploy'
+      kubernetesServiceConnection: 'clusterprod-sc'
+      namespace: 'default'
+      manifests: 'k8s/prod-deployment.yaml'
