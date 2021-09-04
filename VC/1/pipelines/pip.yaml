@@ -26,6 +26,11 @@ variables:
   vmImageName: 'ubuntu-latest'
   IMAGE_TAG: '$(Build.BuildId)'
   AzureSubscription: 'AzureServiceConnection' # Name of the Service Connection
+  imageRepo: app
+  tag: '$(Build.BuildId)'
+  kubernetesServiceConnection: 'clusterdev-sc'
+  kubernetesServiceConnection: 'clustertest-sc'
+  kubernetesServiceConnection: 'clusterprod-sc'
 
 pool:
   vmImage: ubuntu-latest
