@@ -79,9 +79,18 @@ RUN apt-get -y install \
   
 
 # Get nginx source.
-RUN wget https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz && \
-  tar zxf nginx-${NGINX_VERSION}.tar.gz && \
-  rm nginx-${NGINX_VERSION}.tar.gz
+#RUN wget https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz && \
+#  tar zxf nginx-${NGINX_VERSION}.tar.gz && \
+#  rm nginx-${NGINX_VERSION}.tar.gz
+
+
+WORKDIR /usr/src/
+
+RUN \
+	echo "Cloning nginx $NGINX_VERSION " \
+	&& git clone https://github.com/nginx/nginx.git /usr/src/nginx-$NGINX_VERSION
+	&& git reset --hard 285a495d
+
 
 
 # Expose Port for the Application 
