@@ -84,12 +84,25 @@ RUN \
 		git \
 		g++ \
 		cmake
-
-
-# Ensure the required software to compile NGINX is installed
-
+		
+# Build dependencies and Ensure the required software to compile NGINX is installed
 RUN apt-get -y install \
-  binutils \
+  build-base \
+  ca-certificates \
+  curl \
+  libc-dev \
+  libgcc \
+  linux-headers \
+  make \
+  musl-dev \
+  openssl \
+  openssl-dev \
+  pcre \
+  pcre-dev \
+  pkgconf \
+  pkgconfig \
+  zlib-dev
+   binutils \
   build-essential \
   dirmngr \
   libssl-dev \
@@ -102,6 +115,8 @@ RUN apt-get -y install \
   automake \
   git \
   g++ \
+
+
 
   
   
