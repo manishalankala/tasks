@@ -1,7 +1,8 @@
 FROM ubuntu:20.04
 
+
 ENV NGINX_COMMIT=285a495d
-ENV NGINX_VERSION=1.21.6
+ENV NGINX_VERSION=1.18.0
 
 # Update Ubuntu Software repository
 RUN apt update
@@ -13,7 +14,18 @@ RUN apt-get -y install \
   dirmngr \
   libssl-dev \
   openssl-dev \
+  linux-headers \
+  gcc \
+  go \
+  autoconf \
+	libtool \
+	automake \
+	git \
+	g++ \
 
+  
+  
+  
 
 # Get nginx source.
 RUN wget https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz && \
