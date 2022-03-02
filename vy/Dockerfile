@@ -75,7 +75,7 @@ RUN apt-get -y install \
   pkgconf \
   pkgconfig \
   zlib-dev
-   binutils \
+  binutils \
   build-essential \
   dirmngr \
   libssl-dev \
