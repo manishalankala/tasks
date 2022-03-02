@@ -69,10 +69,10 @@ RUN apt-get -y install \
   gcc \
   go \
   autoconf \
-	libtool \
-	automake \
-	git \
-	g++ \
+  libtool \
+  automake \
+  git \
+  g++ \
 
   
   
