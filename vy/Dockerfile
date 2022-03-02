@@ -1,1 +1,9 @@
+FROM ubuntu:20.04
 
+ARG NGINX_COMMIT=285a495d
+ARG NGINX_VERSION=1.21.6
+
+
+
+# Expose Port for the Application 
+EXPOSE 10080 10443
