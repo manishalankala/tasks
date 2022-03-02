@@ -57,33 +57,6 @@ ARG CONFIG="\
 		--add-module=/usr/src/headers-more-nginx-module-$HEADERS_MORE_VERSION \
 
 
-
-RUN \
-	apk add --no-cache --virtual .build-deps \
-		gcc \
-		libc-dev \
-		make \
-		musl-dev \
-		go \
-		ninja \
-		mercurial \
-		openssl-dev \
-		pcre-dev \
-		zlib-dev \
-		linux-headers \
-		curl \
-		gnupg1 \
-		libxslt-dev \
-		gd-dev \
-		geoip-dev \
-		perl-dev \
-	&& apk add --no-cache --virtual .brotli-build-deps \
-		autoconf \
-		libtool \
-		automake \
-		git \
-		g++ \
-		cmake
 		
 # Build dependencies and Ensure the required software to compile NGINX is installed
 RUN apt-get -y install \
