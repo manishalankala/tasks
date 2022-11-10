@@ -1,3 +1,13 @@
-[ec2_user]
+[nginx]
+#ip address of Deployed Node
+<x.x.x.x>  
+
+
+[nodejs]
+#ip address of Deployed Node
+<x.x.x.x>  
+
+
+[mongodb]
 #ip address of Deployed Node
 <x.x.x.x>  
