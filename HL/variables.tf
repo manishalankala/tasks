@@ -23,5 +23,5 @@ variable "vpc_cidr_block" {
 
 
 variable "ssh_user" {
-  default  = "ec2_user"
+  default  = "ubuntu"
 }
