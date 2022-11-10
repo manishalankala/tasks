@@ -18,3 +18,7 @@ provider "aws" {
   secret_key = "${var.aws_secret_access_key}"
   region     = "${var.vpc_region}"
 }
+
+
+
+data "aws_availability_zones" "available" {}
