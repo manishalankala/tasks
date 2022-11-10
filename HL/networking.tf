@@ -125,7 +125,8 @@ resource "aws_route_table_association" "vpc_private_sn_rt_assn" {
 resource "aws_security_group" "nginx_sg" {
 
     vpc_id = "${aws_vpc.vpc_name.id}"
-
+    name   = "nginx_sg"
+  
     ingress {
         from_port = 22
         to_port = 22
