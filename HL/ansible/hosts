@@ -1,0 +1,3 @@
+[ec2_user]
+#ip address of Deployed Node
+<x.x.x.x>  
