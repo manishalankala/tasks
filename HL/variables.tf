@@ -20,3 +20,8 @@ variable "vpn_password" {
 variable "vpc_cidr_block" {
   description = "CIDR block for vpc"
 }
+
+
+variable "ssh_user" {
+  default  = "ec2_user"
+}
