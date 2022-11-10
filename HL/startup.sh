@@ -13,4 +13,4 @@ apt-get install git vim -y
 
 ##### RUN ansible playbook #####
 
-ansible-playbook ./ansible/nginx/
+ansible-playbook -i hosts ./ansible/nginx/
