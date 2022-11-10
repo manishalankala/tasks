@@ -15,3 +15,8 @@ variable "vpn_password" {
   type        = string
   default     = "password"
 }
+
+
+variable "vpc_cidr_block" {
+  description = "CIDR block for vpc"
+}
