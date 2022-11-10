@@ -1,8 +1,4 @@
 terraform {
-  required_version = ">= 0.13"
-}
-
-terraform {
   backend "s3" {}
   required_providers {
     aws = {
@@ -10,9 +6,12 @@ terraform {
       version = ">= 3.63.0"
     }
   }
+  required_version = ">= 0.13"
 }
 
-#AWS Provider 
+
+
+####  AWS Provider 
 provider "aws" {
   access_key = "${var.aws_access_key_id}"
   secret_key = "${var.aws_secret_access_key}"
