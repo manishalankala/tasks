@@ -3,7 +3,7 @@
 ##### Install Dependencies ######
 
 apt-get update -y
-apt-get install git vim curl wget -y
+apt-get install git vim curl wget software-properties-common -y
 
 
 ##### RUN ansible playbook #####
