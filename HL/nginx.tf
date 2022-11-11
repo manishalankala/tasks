@@ -3,7 +3,7 @@
 
 resource "aws_launch_configuration" "nginx" {
   name_prefix     = "nginx-"
-  image_id        = "xxxxxxxxx "
+  image_id        = "xxxxxxxxx"
   instance_type   = "t2.medium"
   user_data       = file("startup.sh")
   security_group = "aws_security_group.nginx_sg.id"
@@ -20,7 +20,7 @@ resource "aws_launch_configuration" "nginx" {
   }
   
   provisioner "local-exec" {
-    command = "ansible-playbook  -i ${aws_instance.nginx.public_ip}, --private-key ${var.private_key_path} /path/nginx.yaml"
+    command = "ansible-playbook  -i ${aws_instance.nginx.public_ip} --private-key ${var.private_key_path} /path/nginx.yaml"
   }
   
   lifecycle {
