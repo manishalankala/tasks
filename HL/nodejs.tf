@@ -31,15 +31,15 @@ resource "aws_launch_configuration" "nodejs" {
 }
 
 
-resource "aws_autoscaling_group" "nginx" {
-  name                 = "nginx"
+resource "aws_autoscaling_group" "nodejs" {
+  name                 = "nodejs"
   min_size             = 2
-  max_size             = 2
+  max_size             = 3
 #  desired_capacity     = 1
   launch_configuration = aws_launch_configuration.nginx.name
   tag {
     key                 = "Name"
-    value               = "Nginx with Terraform and Ansible"
+    value               = "Nodejs with Terraform and Ansible"
     propagate_at_launch = true
   }
 }
