@@ -32,7 +32,7 @@ resource "aws_launch_configuration" "nodejs" {
     command = "ansible-playbook --private-key ${var.private_key_path} /HL/nodejs.yaml"
   }
 
-#    # Execute Ansible Playbook
+### Execute Ansible Playbook
 # provisioner "remote-exec" {
 #    inline = [
 #      "sleep 120; ansible-playbook nginx.yaml"
