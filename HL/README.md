@@ -29,5 +29,7 @@ Default output format [None]: json
 #### Reference links: 
 
 https://openvpn.net/vpn-server-resources/amazon-web-services-ec2-byol-appliance-quick-start-guide/
+
 https://developer.hashicorp.com/terraform/tutorials/aws-get-started/aws-build#prerequisites
+
 https://github.com/adammck/terraform-inventory
