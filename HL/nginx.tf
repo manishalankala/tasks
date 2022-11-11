@@ -20,9 +20,7 @@ resource "aws_launch_configuration" "nginx" {
   }
   
   
-  provisioner "remote-exec" {
-    inline [ = "ansible-playbook  /path/nginx.yaml" ]
-  }
+ 
 
   lifecycle {
     create_before_destroy = true
