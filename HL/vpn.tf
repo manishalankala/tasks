@@ -1,4 +1,4 @@
-#### VPN Server #####
+#### VPN Server with image alternatively we can create via ansible roles also and create an ami and utilize that #####
 
 
 resource "aws_instance" "vpn-server" {
