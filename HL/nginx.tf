@@ -24,7 +24,7 @@ resource "aws_launch_configuration" "nginx" {
   }
   
   provisioner "local-exec" {
-    command = "ansible-playbook  -i ${aws_instance.nginx.public_ip} --private-key ${var.private_key_path} /path/nginx.yaml"
+    command = "ansible-playbook -i '${aws_instance.nginx.public_ip},' --private-key ${var.private_key_path} /path/nginx.yaml"
   }
   
   lifecycle {
