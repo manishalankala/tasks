@@ -42,3 +42,8 @@ resource "aws_autoscaling_group" "nginx" {
     propagate_at_launch = true
   }
 }
+
+
+output "nginx_ip" {
+  value = aws_instance.nginx.public_ip
+}
