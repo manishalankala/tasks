@@ -7,6 +7,9 @@
 ![image](https://user-images.githubusercontent.com/33985509/201357002-0523d7dd-3042-4102-952b-fa4f659de5b8.png)
 
 
+
+Configure awscli
+
 ~~~
 
 $ aws configure
