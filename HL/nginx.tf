@@ -3,7 +3,7 @@
 
 resource "aws_launch_configuration" "nginx" {
   name_prefix     = "nginx-"
-  image_id        = " "
+  image_id        = "xxxxxxxxx "
   instance_type   = "t2.medium"
   user_data       = file("startup.sh")
   security_groups = [aws_security_group.nginx_sg.id]
