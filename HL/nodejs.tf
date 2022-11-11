@@ -21,16 +21,15 @@ resource "aws_launch_configuration" "nodejs" {
 
   
  provisioner "remote-exec" {
-    inline = [
-      "sudo ln -s /usr/bin/python3 /usr/bin/python",
-      "chmod +x /tmp/start.sh",
-      "./tmp/wait-for-cloud-init.sh",
-    ]
+    inline = [ echo whoami ]
   }
   
+  
  provisioner "local-exec" {
-    command = "ansible-playbook --private-key ${var.private_key_path} /HL/nodejs.yaml"
+    command = "ansible-playbook  -i ${aws_instance.nginx.public_ip} --private-key ${var.private_key_path} /path/nginx.yaml"
   }
+  
+  
 
 ### Execute Ansible Playbook
 # provisioner "remote-exec" {
