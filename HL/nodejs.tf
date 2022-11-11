@@ -9,16 +9,17 @@ resource "aws_launch_configuration" "nodejs" {
   user_data       = file("startup.sh")
   security_groups = [aws_security_group.nginx_sg.id]
   
-  provisioner "remote-exec" {
-    inline = ["echo 'Wait until SSH is ready'"]
-
-    connection {
-      type        = "ssh"
-      user        = var.ssh_user
-      private_key = file(var.private_key_path)
-
+ provisioner "file" {
+    source      = "/start.sh"
+    destination = "/tmp/start.sh"
+  connection {
+    type        = "ssh"
+    user        = "ubuntu"
+    private_key = file("/home/manish/keys/aws_key")
+    host        = aws_instance.nginx.public_ip
     }
   }
+  
   
   
   provisioner "local-exec" {
