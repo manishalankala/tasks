@@ -1,1 +1,7 @@
+---
+- name: Install Nginx
+  hosts: [ansible_user]
+  remote_user: root
+  roles:
+    - nginx
 
