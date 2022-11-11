@@ -8,6 +8,11 @@ resource "aws_launch_configuration" "nginx" {
   user_data       = file("startup.sh")
   security_groups = [aws_security_group.nginx_sg.id]
   
+  provisioner "file" {
+    source      = "${path.module}/key.pub"
+    destination = "~/.ssh/key.pub"
+  }
+  
   provisioner "remote-exec" {
     inline = ["echo 'Wait until SSH is ready'"]
 
