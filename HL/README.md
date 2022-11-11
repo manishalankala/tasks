@@ -7,6 +7,15 @@
 ![image](https://user-images.githubusercontent.com/33985509/201357002-0523d7dd-3042-4102-952b-fa4f659de5b8.png)
 
 
+~~~
+
+$ aws configure
+AWS Access Key ID [None]: XXXXXXXXXXXXXXXXXXXX
+AWS Secret Access Key [None]: xxxxxxxxxxxxxxxxxxx
+Default region name [None]: 
+Default output format [None]: json
+
+~~~
 
 #### Terraform :
 
