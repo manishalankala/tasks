@@ -15,10 +15,27 @@ terraform {
 provider "aws" {
   access_key = "${var.aws_access_key_id}"
   secret_key = "${var.aws_secret_access_key}"
-  region     = "${var.vpc_region}"
+  region     = "eu-central-1"
   profile    = "ansible"
+  alias      = "region1"
 }
 
 
+provider "aws" {
+  access_key = "${var.aws_access_key_id}"
+  secret_key = "${var.aws_secret_access_key}"
+  region     = "eu-central-1"
+  profile    = "ansible"
+  alias      = "region2"
+}
+
+
+provider "aws" {
+  access_key = "${var.aws_access_key_id}"
+  secret_key = "${var.aws_secret_access_key}"
+  region     = "eu-central-1"
+  profile    = "ansible"
+  alias      = "region3"
+}
 
 data "aws_availability_zones" "available" {}
