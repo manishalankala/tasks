@@ -35,8 +35,7 @@ resource "aws_autoscaling_group" "nodejs" {
   name                 = "nodejs"
   min_size             = 2
   max_size             = 3
-#  desired_capacity     = 1
-  launch_configuration = aws_launch_configuration.nginx.name
+  launch_configuration = aws_launch_configuration.nodejs.name
   tag {
     key                 = "Name"
     value               = "Nodejs with Terraform and Ansible"
