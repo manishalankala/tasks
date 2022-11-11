@@ -8,3 +8,11 @@
         pkg:
           - nodejs
           - npm
+          
+- name: Check Node version
+  command: node -v
+  ignore_errors: true
+
+- name: Check NPM version
+  command: npm -v
+  ignore_errors: true
