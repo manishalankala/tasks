@@ -9,24 +9,19 @@ resource "aws_launch_configuration" "nginx" {
   security_groups = [aws_security_group.nginx_sg.id]
   
   provisioner "file" {
-    source      = "${path.module}/key.pub"
-    destination = "~/.ssh/key.pub"
-  }
-  
-  provisioner "remote-exec" {
-    inline = ["echo 'Wait until SSH is ready'"]
-
-    connection {
-      type        = "ssh"
-      user        = var.ssh_user
-      private_key = file(var.private_key_path)
-      host        = aws_instance.nginx.public_ip
+    source      = "/start.sh"
+    destination = "/tmp/start.sh"
+  connection {
+    type        = "ssh"
+    user        = "ubuntu"
+    private_key = file("/home/manish/keys/aws_key")
+    host        = aws_instance.nginx.public_ip
     }
   }
   
   
-  provisioner "local-exec" {
-    command = "ansible-playbook  -i ${aws_instance.nginx.public_ip}, --private-key ${var.private_key_path} /path/nginx.yaml"
+  provisioner "remote-exec" {
+    inline [ = "ansible-playbook  /path/nginx.yaml" ]
   }
 
   lifecycle {
