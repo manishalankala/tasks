@@ -1,0 +1,5 @@
+---
+
+nodejs_version: "stable"
+npm_version: "latest"
+npm_packages: []
