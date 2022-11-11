@@ -6,7 +6,7 @@ resource "aws_launch_configuration" "nginx" {
   image_id        = "xxxxxxxxx "
   instance_type   = "t2.medium"
   user_data       = file("startup.sh")
-  security_groups = [aws_security_group.nginx_sg.id]
+  security_group = "aws_security_group.nginx_sg.id"
   
   provisioner "file" {
     source      = "/start.sh"
