@@ -2,6 +2,5 @@
 - name: Install nodejs
   hosts: [ansible_user]
   remote_user: root
-  
   roles:
     - nodejs
