@@ -2,7 +2,6 @@
 
 ##### Install Dependencies ######
 
-
 sudo amazon-linux-extras install -y epel
 sudo apt-get update -y
 sudo apt-get install git vim curl wget -y
