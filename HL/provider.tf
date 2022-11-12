@@ -24,7 +24,7 @@ provider "aws" {
 provider "aws" {
   access_key = "${var.aws_access_key_id}"
   secret_key = "${var.aws_secret_access_key}"
-  region     = "eu-central-1"
+  region     = "eu-east-1"
   profile    = "ansible"
   alias      = "region2"
 }
@@ -33,7 +33,7 @@ provider "aws" {
 provider "aws" {
   access_key = "${var.aws_access_key_id}"
   secret_key = "${var.aws_secret_access_key}"
-  region     = "eu-central-1"
+  region     = "eu-west-1"
   profile    = "ansible"
   alias      = "region3"
 }
