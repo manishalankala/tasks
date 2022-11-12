@@ -9,29 +9,27 @@ resource "aws_key_pair" "ec2loginkey" {
 
 ###### VPC ######
 
-resource "aws_vpc" "vpc_name" {
-  cidr_block           = "${var.vpc_cidr_block}"
+resource "aws_vpc" "vpc" {
+  name = "vpc"
+  cidr_block           = "10.0.0.0/16"
   enable_dns_support   = "true"
   enable_dns_hostnames = "true"
-  enable_classiclink   = "false"
-
   tags {
-    Name = "${var.vpc_name}"
+    Name = "vpc"
   }
 }
 
 
-###### Public subnet ######
+###### Internet gateway ######
 
-rresource "aws_subnet" "vpc_public_sn_1" {
-  vpc_id            = "${aws_vpc.vpc_name.id}"
-  cidr_block        = "${var.vpc_public_subnet_1_cidr}"
-  availability_zone = "${data.aws_availability_zones.available.names[0]}"
-  map_public_ip_on_launch = "true"
+resource "aws_internet_gateway" "vpc_igw" {
+  vpc_id = "${aws_vpc.vpc.id}"
   tags {
-    Name = "${var.vpc_name}_vpc_public_sn_1"
+    Name = "${var.vpc}_igw"
   }
 }
+
+
 
 
 ###### Private subnet ######
@@ -48,14 +46,6 @@ resource "aws_subnet" "vpc_private_sn_1" {
 }
 
 
-###### Internet gateway ######
-
-resource "aws_internet_gateway" "vpc_ig" {
-  vpc_id = "${aws_vpc.vpc_name.id}"
-  tags {
-    Name = "${var.vpc_name}_ig"
-  }
-}
 
 
 ###### nat gateway ###### 
