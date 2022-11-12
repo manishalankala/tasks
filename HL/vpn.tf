@@ -1,5 +1,5 @@
 
-### Note ####
+#### Note ####
 #### VPN Server with image alternatively we can create via ansible roles also and create an ami and utilize that using data #####
 
 
@@ -16,6 +16,8 @@ resource "aws_instance" "vpn" {
   }
 }
 
+
+#### vpn with public ip association ####
 
 resource "aws_eip" "vpn_eip" {
   instance = aws_instance.vpn.id
