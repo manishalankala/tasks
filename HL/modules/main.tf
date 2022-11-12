@@ -7,7 +7,7 @@ resource "aws_instance" "mongo" {
   instance_type          = "t2.large"
   key_name               = " "
   subnet_id              = " "
-  user_data              = " "
+  user_data              = "${data.template_file.user_data_db.rendered}"
   vpc_security_group_ids = ["${aws_security_group.mongo_sg.id}"]
 #  iam_instance_profile   = " "
   root_block_device {
