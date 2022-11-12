@@ -3,6 +3,11 @@
 
 module "mongodb" {
   source                = "../modules/mongodb"
+    providers = {
+    aws.region1 = aws.region1
+    aws.region2 = aws.region1
+    aws.region3 = aws.region1
+  }
   domain                = local.main_domain
   location              = " "
   name                  = "mongo"
