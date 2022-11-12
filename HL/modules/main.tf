@@ -17,7 +17,6 @@ resource "aws_instance" "mongo" {
 
   tags = {
     Name = "mongo_${count.index + 1}"
-    Type = "secondary"
   }
   
  
