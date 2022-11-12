@@ -1,6 +1,7 @@
 
 
 
+
 module "mongodb" {
   source                = "../modules/mongodb"
     providers = {
@@ -8,10 +9,9 @@ module "mongodb" {
     aws.region2 = aws.region2
     aws.region3 = aws.region3
   }
-  domain                = local.main_domain
-  location              = " "
   name                  = "mongo"
-  instance_name    = "MongoDB-Server"
+  instance_type         = "t2.large"
+  instance_name         = "MongoDB-Server"
   associate_public_ip_address = false
 
 }
