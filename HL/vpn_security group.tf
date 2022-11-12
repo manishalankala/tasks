@@ -28,7 +28,7 @@ resource "aws_security_group" "vpn_sg" {
     ingress {
         from_port = 1194
         to_port = 1194
-        protocol = "tcp"
+        protocol = "udp"
         cidr_blocks = ["0.0.0.0/0"]
     }
     egress {
