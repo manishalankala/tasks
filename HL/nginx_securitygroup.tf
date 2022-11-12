@@ -1,5 +1,6 @@
 resource "aws_security_group" "nginx_sg" {
     name = "nginx_sg"
+    vpc_id  = aws_vpc.vpc.id
     ingress {
         from_port = 22
         to_port = 22
