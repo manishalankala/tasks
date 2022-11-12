@@ -19,4 +19,15 @@ resource "aws_instance" "mongo" {
   }
   
  
+##### for static ips #######  
 
+resource "aws_network_interface" "test" {
+  subnet_id       = aws_subnet.xxxxxxx.id
+  private_ips     = ["10.0.0.50"]
+  security_groups = [aws_security_group.web.id]
+
+  attachment {
+    instance     = aws_instance.mongo.id
+    device_index = 1
+  }
+}
