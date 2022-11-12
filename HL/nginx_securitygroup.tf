@@ -1,3 +1,5 @@
+#### vpn_sg is added to nginx
+
 resource "aws_security_group" "nginx_sg" {
     name = "nginx_sg"
     vpc_id  = aws_vpc.vpc.id
@@ -5,20 +7,13 @@ resource "aws_security_group" "nginx_sg" {
         from_port = 22
         to_port = 22
         protocol = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
-        security_group_id = aws_security_group.vpn_sg.id
+        security_group_id = ["${aws_security_group.vpn_sg.id}"]
     }
     ingress {
         from_port = 80
         to_port = 80
         protocol = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
-    }
-    egress {
-        from_port = 0
-        to_port = 0
-        protocol = -1
-        cidr_blocks = ["0.0.0.0/0"]
+        security_group_id = ["${aws_security_group.vpn_sg.id}"]
     }
     tags {
         Name = "nginx_sg"
