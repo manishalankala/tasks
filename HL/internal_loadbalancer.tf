@@ -1,6 +1,6 @@
 resource "aws_lb" "internal_lb" {
   name               = "internal_lb"
-  load_balancer_type = "network"
+  internal           = true
 
   subnet_mapping {
     subnet_id            = aws_subnet.xx.id
