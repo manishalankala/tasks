@@ -8,21 +8,21 @@ resource "aws_security_group" "mongo_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["${var.vpc_cidr_block}"]
+    security_group_id = ["${aws_security_group.vpn_sg.id}", "${aws_security_group.application_sg.id}"]
   }
 
   ingress {
     from_port   = 27017
     to_port     = 27017
     protocol    = "tcp"
-    cidr_blocks = ["${var.vpc_cidr_block}"]
+    security_group_id = ["${aws_security_group.vpn_sg.id}", "${aws_security_group.application_sg.id}"]
   }
 
   ingress {
   from_port   = -1
   to_port     = -1
   protocol = "icmp"
-  cidr_blocks  = ["${var.vpc_cidr_block}"]
+  security_group_id = ["${aws_security_group.vpn_sg.id}", "${aws_security_group.application_sg.id}"]
 }
 
 
@@ -30,7 +30,7 @@ resource "aws_security_group" "mongo_sg" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+    security_group_id = ["${aws_security_group.vpn_sg.id}", "${aws_security_group.application_sg.id}"]
   }
 
   tags = {
