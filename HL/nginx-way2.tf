@@ -25,6 +25,7 @@ resource "aws_autoscaling_group" "nginx_asg" {
   }
 }
 
+##### scale up policy
 
 resource "aws_autoscaling_policy" "nginx_asp" {
   name                   = "nginx_asp"
@@ -34,3 +35,17 @@ resource "aws_autoscaling_policy" "nginx_asp" {
   cooldown               = "300"
   policy_type            = "SimpleScaling"
 }
+
+
+
+##### scale down policy
+
+#resource "aws_autoscaling_policy" "nginx_asp" {
+#  name                   = "nginx_asp"
+#  autoscaling_group_name = aws_autoscaling_group.nginx_asg.name
+#  adjustment_type        = "ChangeInCapacity"
+#  scaling_adjustment     = "-1" # decreasing instance by 1 
+#  cooldown               = "300"
+#  policy_type            = "SimpleScaling"
+#}
+
