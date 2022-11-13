@@ -36,3 +36,8 @@ https://openvpn.net/vpn-server-resources/amazon-web-services-ec2-byol-appliance-
 https://developer.hashicorp.com/terraform/tutorials/aws-get-started/aws-build#prerequisites
 
 https://github.com/adammck/terraform-inventory
+
+
+#### Note
+
+It doesn’t support features like host-based routing or path-based routing. In other words, it simply distributes the load across all instances that are registered. As a result, the Classic Load Balancer can only distribute traffic to a single URL.
