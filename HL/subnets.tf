@@ -49,7 +49,7 @@ resource "aws_subnet" "vpc_public_subnet_4" {
 
 ###### Public subnet additional ######
 
-resource "aws_subnet" "vpc_public_subnet_4" {
+resource "aws_subnet" "vpc_public_subnet_5" {
   vpc_id            = "vpc"
   cidr_block        = "10.0.5.0/24"
   availability_zone = "${data.aws_availability_zones.available.names[0]}"
@@ -61,7 +61,7 @@ resource "aws_subnet" "vpc_public_subnet_4" {
 
 ###### Public subnet additional ######
 
-resource "aws_subnet" "vpc_public_subnet_4" {
+resource "aws_subnet" "vpc_public_subnet_6" {
   vpc_id            = "vpc"
   cidr_block        = "10.0.6.0/24"
   availability_zone = "${data.aws_availability_zones.available.names[0]}"
