@@ -20,3 +20,11 @@ resource "aws_eip" "alb_eip2" {
   instance = aws_lb.alb.id
   vpc = true
 } 
+
+
+resource "aws_eip" "nat_eip"  {
+	vpc  = true
+	tags = {
+		Name = "nateip"
+	}
+}
