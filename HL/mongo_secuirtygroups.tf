@@ -2,7 +2,7 @@
 
 resource "aws_security_group" "mongo_sg" {
   name   = "mongo_sg"
-  vpc_id = "${aws_vpc.vpc_name.id}"
+  vpc_id = "${aws_vpc.vpc.id}"
 
   ingress {
     from_port   = 22
