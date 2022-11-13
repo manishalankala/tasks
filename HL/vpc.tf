@@ -67,12 +67,6 @@ resource "aws_route_table" "vpc_private_sn_rt" {
 
 
 
-#######  Associate the routing table to public subnet ###### 
-
-resource "aws_route_table_association" "vpc_public_sn_rt_assn" {
-  subnet_id      = "${aws_subnet.vpc_public_sn_1.id}"
-  route_table_id = "${aws_route_table.vpc_public_sn_rt.id}"
-}
 
 
 #######  Associate the routing table to private subnet ###### 
