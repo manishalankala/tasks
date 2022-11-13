@@ -17,12 +17,7 @@ resource "aws_instance" "vpn" {
 }
 
 
-#### vpn with public ip association ####
 
-resource "aws_eip" "vpn_eip" {
-  instance = aws_instance.vpn.id
-  vpc = true
-} 
 
 output "access_vpn_url" {
   value       = "https://${aws_eip.vpn_eip}:943/admin"
