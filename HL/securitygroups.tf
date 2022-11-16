@@ -57,8 +57,12 @@ alb_external_sg
 
 alb_internal_sg
 
+  resource "aws_security_group" "vpn_sg" {
+  vpc_id = "vpc"
+  name   = "vpn_sg"
 
-resource "aws_security_group" "nginx_sg" {
+
+resource "aws_security_group" "alb_external_sg" {
     name = "nginx_sg"
     vpc_id  = aws_vpc.vpc.id
     ingress {
@@ -73,12 +77,13 @@ resource "aws_security_group" "nginx_sg" {
         protocol = "tcp"
         security_group_id = "${aws_security_group.vpn_sg.id}"
     }
-    tags {
-        Name = "nginx_sg"
-    }
 }
 
 
+  
+  
+  
+  
 resource "aws_security_group" "mongodb_sg" {
   vpc_id      = "${aws_vpc.vpc.id}"
 
