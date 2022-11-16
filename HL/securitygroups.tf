@@ -177,3 +177,11 @@ resource "aws_security_group_rule" "mongo_egress_all" {
   cidr_blocks = ["${var.vpc_public_subnet_7}","${var.vpc_public_subnet_8}","${var.vpc_public_subnet_9}"]
 }
 
+  resource "aws_security_group_rule" "mongo_egress_1" {
+  security_group_id = "${aws_security_group.mongo_sg.id}"
+  type = "egress"
+  from_port = -1
+  to_port = -1
+  protocol = "icmp"
+  cidr_blocks = ["${var.vpc_public_subnet_7}","${var.vpc_public_subnet_8}","${var.vpc_public_subnet_9}"]
+}
