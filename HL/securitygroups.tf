@@ -145,53 +145,35 @@ resource "aws_security_group_rule" "alb_internal_egress_all" {
 #-------------------------------------
 # Mongodb - Security_Group & Rules
 #-------------------------------------  
-     
-resource "aws_security_group" "mongodb_sg" {
-  vpc_id      = "${aws_vpc.vpc.id}"
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["${var.vpc_private_subnet_2}","${var.vpc_private_subnet_3}"]
-  }
-  ingress {
-    from_port   = 27017
-    to_port     = 27017
-    protocol    = "tcp"
-    cidr_blocks = ["${ }"]
-  }
-  ingress {
-    from_port   = -1
-    to_port     = -1
-    protocol    = "icmp"
-    cidr_blocks = ["${}"]
-  }
+  
+resource "aws_security_group" "mongo_sg" {
+  vpc_id = "vpc"
+  name   = "mongo_sg"
 
-  egress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["${}"]
-  }
-  egress {
-    from_port   = 27017
-    to_port     = 27017
-    protocol    = "tcp"
-    cidr_blocks = ["${ }"]
-  }
-  egress {
-    from_port   = 0
-    to_port     = 65535
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  egress {
-    from_port   = -1
-    to_port     = -1
-    protocol    = "icmp"
-    cidr_blocks = ["${ }"]
-  }
-
-
-    
+resource "aws_security_group_rule" "mongo_ingress_27017" {
+  security_group_id = "${aws_security_group.mongo_sg.id}"
+  type = "ingress"
+  from_port = 27017
+  to_port = 27017
+  protocol = "tcp"
+  cidr_blocks = ["${var.vpc_public_subnet_7}","${var.vpc_public_subnet_8}","${var.vpc_public_subnet_9}"]
 }
+
+resource "aws_security_group_rule" "mongo_ingress_1" {
+  security_group_id = "${aws_security_group.mongo_sg.id}"
+  type = "ingress"
+  from_port = -1
+  to_port = -1
+  protocol = "icmp"
+  cidr_blocks = ["${var.vpc_public_subnet_7}","${var.vpc_public_subnet_8}","${var.vpc_public_subnet_9}"]
+}
+
+resource "aws_security_group_rule" "mongo_egress_all" {
+  security_group_id = "${aws_security_group.mongo_sg.id}"
+  type = "egress"
+  from_port = 0
+  to_port = 65535
+  protocol = "tcp"
+  cidr_blocks = ["${var.vpc_public_subnet_7}","${var.vpc_public_subnet_8}","${var.vpc_public_subnet_9}"]
+}
+
