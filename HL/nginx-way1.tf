@@ -1,8 +1,8 @@
 ###### Creating Launch Configuration ######
 
 
-resource "aws_launch_configuration" "nginx" {
-  name            = "nginx-"
+resource "aws_launch_configuration" "nginx_lc" {
+  name            = "nginx1"
   image_id        = "xxxxxxxxx"
   instance_type   = "t2.medium"
   user_data       = file("startup.sh")
