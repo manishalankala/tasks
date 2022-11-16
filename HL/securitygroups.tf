@@ -156,7 +156,7 @@ resource "aws_security_group_rule" "mongo_ingress_27017" {
   from_port = 27017
   to_port = 27017
   protocol = "tcp"
-  cidr_blocks = ["${var.vpc_public_subnet_7}","${var.vpc_public_subnet_8}","${var.vpc_public_subnet_9}"]
+  cidr_blocks = ["${var.vpc_private_subnet_7}","${var.vpc_public_subnet_8}","${var.vpc_private_subnet_9}"]
 }
 
 resource "aws_security_group_rule" "mongo_ingress_1" {
@@ -165,7 +165,7 @@ resource "aws_security_group_rule" "mongo_ingress_1" {
   from_port = -1
   to_port = -1
   protocol = "icmp"
-  cidr_blocks = ["${var.vpc_public_subnet_7}","${var.vpc_public_subnet_8}","${var.vpc_public_subnet_9}"]
+  cidr_blocks = ["${var.vpc_private_subnet_7}","${var.vpc_private_subnet_8}","${var.vpc_private_subnet_9}"]
 }
 
 resource "aws_security_group_rule" "mongo_egress_all" {
@@ -174,7 +174,7 @@ resource "aws_security_group_rule" "mongo_egress_all" {
   from_port = 0
   to_port = 65535
   protocol = "tcp"
-  cidr_blocks = ["${var.vpc_public_subnet_7}","${var.vpc_public_subnet_8}","${var.vpc_public_subnet_9}"]
+  cidr_blocks = ["${var.vpc_private_subnet_7}","${var.vpc_public_subnet_8}","${var.vpc_private_subnet_9}"]
 }
 
   resource "aws_security_group_rule" "mongo_egress_1" {
@@ -183,5 +183,5 @@ resource "aws_security_group_rule" "mongo_egress_all" {
   from_port = -1
   to_port = -1
   protocol = "icmp"
-  cidr_blocks = ["${var.vpc_public_subnet_7}","${var.vpc_public_subnet_8}","${var.vpc_public_subnet_9}"]
+  cidr_blocks = ["${var.vpc_private_subnet_7}","${var.vpc_public_subnet_8}","${var.vpc_private_subnet_9}"]
 }
