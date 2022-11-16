@@ -11,8 +11,8 @@ resource "aws_security_group" "application_sg" {
 #        security_group_id = "${aws_security_group.vpn_sg.id}"
     }
     ingress {
-        from_port = 5000
-        to_port = 5000
+        from_port = 3000
+        to_port = 3000
         protocol = "tcp"
 #        security_group_id = "${aws_security_group.vpn_sg.id}"
     }
