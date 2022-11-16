@@ -73,7 +73,7 @@ resource "aws_subnet" "vpc_public_subnet_6" {
 
 
 
-###### Private subnet ######
+###### Private subnet 1 ######
 
 resource "aws_subnet" "vpc_private_subnet_1" {
   vpc_id            = "vpc"
@@ -86,7 +86,7 @@ resource "aws_subnet" "vpc_private_subnet_1" {
   }
 }
 
-###### Private subnet ######
+###### Private subnet 2 ######
 
 resource "aws_subnet" "vpc_private_subnet_2" {
   vpc_id            = "vpc"
@@ -100,7 +100,7 @@ resource "aws_subnet" "vpc_private_subnet_2" {
 }
 
 
-###### Private subnet ######
+###### Private subnet 3 ######
 
 resource "aws_subnet" "vpc_private_subnet_3" {
   vpc_id            = "vpc"
@@ -113,9 +113,36 @@ resource "aws_subnet" "vpc_private_subnet_3" {
   }
 }
 
-###### Private subnet ######
+###### Private subnet 4 ######
 
 resource "aws_subnet" "vpc_private_subnet_4" {
+  vpc_id            = "vpc"
+  cidr_block        = "10.0.10.0/24"
+  availability_zone = "${data.aws_availability_zones.available.names[1]}"
+  map_public_ip_on_launch = "false"
+
+  tags {
+    Name = "${var.vpc_name}_vpc_private_subnet_4"
+  }
+}
+
+
+###### Private subnet 5 ######
+
+resource "aws_subnet" "vpc_private_subnet_5" {
+  vpc_id            = "vpc"
+  cidr_block        = "10.0.10.0/24"
+  availability_zone = "${data.aws_availability_zones.available.names[1]}"
+  map_public_ip_on_launch = "false"
+
+  tags {
+    Name = "${var.vpc_name}_vpc_private_subnet_4"
+  }
+}
+
+###### Private subnet 6 ######
+
+resource "aws_subnet" "vpc_private_subnet_6" {
   vpc_id            = "vpc"
   cidr_block        = "10.0.10.0/24"
   availability_zone = "${data.aws_availability_zones.available.names[1]}"
