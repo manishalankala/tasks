@@ -19,9 +19,9 @@ resource "aws_lb" "alb_external" {
   security_groups = [ aws_security_group.alb_external_sg.id]                          ]
 }
 
-#-------------------------------------
+#------------------------------------------------
 # External load balancer - Target Group 1
-#-------------------------------------
+#------------------------------------------------
 
 resource "aws_lb_target_group" "nginx1-tg" {
   name     = "nginx2_tg"
@@ -124,21 +124,10 @@ resource "aws_lb_listener" "alb_external_listner_2" {
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.front_end.arn
+    target_group_arn = aws_lb_target_group.nginx1-tg.arn
   }
 }
 
-resource "aws_lb_listener" "nginx_ls" {
-  load_balancer_arn = aws_lb.front_end.arn
-  port              = "443"
-  protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = "arn:aws:iam::187416307283:server-certificate/test_cert_rab3wuqwgja25ct3n4jdj2tzu4"
-
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.nginx1-tg.arn
-  }
 }
 
 
@@ -156,10 +145,29 @@ resource "aws_lb" "alb_internal" {
   security_groups = [ aws_security_group.alb_internal_sg.id]  
 }
 
+#------------------------------------------------
+# Internal load balancer - Target Group 1
+#------------------------------------------------
 
+resource "aws_lb_target_group" "app1_tg" {
+  name        = "tf-example-lb-tg"
+  port        = 3000
+  protocol    = "TCP"
+  target_type = "instance"
+  vpc_id      = aws_vpc.vpc.id
+}
 
+#------------------------------------------------
+# Internal load balancer - Target Group 2
+#------------------------------------------------
 
-
+resource "aws_lb_target_group" "app1_tg" {
+  name        = "tf-example-lb-tg"
+  port        = 3000
+  protocol    = "TCP"
+  target_type = "instance"
+  vpc_id      = aws_vpc.vpc.id
+}
 
 ######### Aleternative #########
 
