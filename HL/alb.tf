@@ -169,6 +169,10 @@ resource "aws_lb_target_group" "app1_tg" {
   vpc_id      = aws_vpc.vpc.id
 }
 
+
+
+
+
 ######### Aleternative #########
 
 #resource "aws_lb" "alb_external" {
