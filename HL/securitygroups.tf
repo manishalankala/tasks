@@ -114,6 +114,7 @@ resource "aws_security_group_rule" "alb_internal_ingress_80" {
   cidr_blocks = ["${var.vpc_public_subnet_3}","${var.vpc_public_subnet_4}"]
 }
 
+
 resource "aws_security_group_rule" "alb_internal_ingress_3000" {
   security_group_id = "${aws_security_group.alb_external_sg.id}"
   type = "ingress"
@@ -141,6 +142,44 @@ resource "aws_security_group_rule" "alb_internal_egress_all" {
   cidr_blocks = ["${var.vpc_public_subnet_3}","${var.vpc_public_subnet_4}"]
 }
 
+  
+#-------------------------------------
+# App instances - Security_Group & Rules
+#-------------------------------------  
+
+resource "aws_security_group" "app_sg" {
+  vpc_id = "vpc"
+  name   = "app_sg"
+
+resource "aws_security_group_rule" "app_ingress_3000" {
+  security_group_id = "${aws_security_group.app_sg.id}"
+  type = "ingress"
+  from_port = 3000
+  to_port = 3000
+  protocol = "tcp"
+  cidr_blocks = ["${var.vpc_public_subnet_5}","${var.vpc_public_subnet_6}"]
+}
+ 
+resource "aws_security_group_rule" "app_ingress_22" {
+  security_group_id = "${aws_security_group.app_sg.id}"
+  type = "ingress"
+  from_port = 22
+  to_port = 22
+  protocol = "tcp"
+  cidr_blocks = ["${var.vpc_public_subnet_5}","${var.vpc_public_subnet_6}"]
+} 
+  
+resource "aws_security_group_rule" "egress_all" {
+  security_group_id = "${aws_security_group.app_sg.id}"
+  type = "egress"
+  from_port = 0
+  to_port = 65535
+  protocol = "tcp"
+  cidr_blocks = ["${var.vpc_public_subnet_5}","${var.vpc_public_subnet_6}","${var.vpc_private_subnet_7}","${var.vpc_public_subnet_8}","${var.vpc_private_subnet_9}"]
+}
+
+  
+  
 
 #-------------------------------------
 # Mongodb - Security_Group & Rules
