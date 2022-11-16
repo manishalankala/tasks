@@ -37,6 +37,10 @@ https://developer.hashicorp.com/terraform/tutorials/aws-get-started/aws-build#pr
 
 https://github.com/adammck/terraform-inventory
 
+https://github.com/itselavia/mongodb-terraform-deployment
+
+
+
 
 #### Note
 
