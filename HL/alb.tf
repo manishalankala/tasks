@@ -88,9 +88,9 @@ resource "aws_lb_target_group" "nginx2_tg" {
 #  External load balancer - http listener 
 #========================================================
 
-resource "aws_lb_listener" "listner" {
+resource "aws_lb_listener" "alb_external_listner_1" {
   
-  load_balancer_arn = aws_lb.lb.id
+  load_balancer_arn = aws_lb.alb_external.id
   port              = 80
   protocol          = "HTTP"
   
@@ -111,9 +111,12 @@ resource "aws_lb_listener" "listner" {
 }
 
 
+#========================================================
+#  External load balancer - https listener 
+#========================================================
 
-resource "aws_lb_listener" "nginx_ls" {
-  load_balancer_arn = aws_lb.front_end.arn
+resource "aws_lb_listener" "alb_external_listner_2" {
+  load_balancer_arn = aws_lb.alb_external.id
   port              = "443"
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-2016-08"
@@ -125,8 +128,23 @@ resource "aws_lb_listener" "nginx_ls" {
   }
 }
 
+resource "aws_lb_listener" "nginx_ls" {
+  load_balancer_arn = aws_lb.front_end.arn
+  port              = "443"
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  certificate_arn   = "arn:aws:iam::187416307283:server-certificate/test_cert_rab3wuqwgja25ct3n4jdj2tzu4"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.nginx1-tg.arn
+  }
+}
 
 
+#-------------------------------------
+# Internal load balancer
+#-------------------------------------
 
 
 resource "aws_lb" "alb_internal" {
