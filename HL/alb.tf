@@ -2,6 +2,8 @@
 
 ### 1. External load balancer
 ### 1. Internal load balancer
+### target group for the external load balancer
+### listener for the load balancer
 
 
 
@@ -14,6 +16,13 @@ resource "aws_lb" "alb_external" {
   subnets = [vpc_public_subnet_3.id,vpc_public_subnet_4.id]
   security_groups = [ aws_security_group.alb_external_sg.id]                          ]
 }
+
+
+
+
+
+
+
 
 
 
