@@ -1,3 +1,7 @@
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
+
+# resource "aws_security_group"
+# resource "aws_security_group_rule"
 
 
 alb_external_sg
