@@ -39,8 +39,11 @@ https://github.com/adammck/terraform-inventory
 
 https://github.com/itselavia/mongodb-terraform-deployment
 
+https://github.com/deleonab/automating-infrastructure-with-terraform-version2
 
+https://github.com/yousafkhamza/terraform-alb
 
+https://github.com/crizstian/mongo-replica-hashicorp-stack
 
 #### Note
 
