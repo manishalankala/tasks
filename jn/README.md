@@ -14,3 +14,12 @@ To access the /calc endpoint of the acceleration-calc microservice from outside 
 
 helm install myapp -f values.yaml
 
+kubectl get deployment
+
+kubectl logs myapp-acceleration-calc-xxxxx
+
+kubectl command to create a proxy and then access the dashboard in your web browser
+
+kubectl proxy
+
+http://localhost:8001/api/v1/namespaces/kube-system/services/https
