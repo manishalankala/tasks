@@ -23,6 +23,9 @@ helm create myapp-chart
 
 helm install ./myapp-chart
 
+helm install my-chart --name my-release --namespace my-namespace
+
+
 
 To access the /calc endpoint of the acceleration-calc microservice from outside the cluster, you can use the load balancer's IP address and port.
 
