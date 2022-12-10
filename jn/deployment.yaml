@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: acceleration-calc
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: acceleration-calc
+  template:
+    metadata:
+      labels:
+        app: acceleration-calc
+    spec:
+      containers:
+      - name: acceleration-calc
+        image: acceleration-calc:latest
+        ports:
+        - containerPort: 3000
