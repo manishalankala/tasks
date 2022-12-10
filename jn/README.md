@@ -21,6 +21,7 @@ helm init
 
 helm create myapp-chart
 
+helm install ./myapp-chart
 
 
 To access the /calc endpoint of the acceleration-calc microservice from outside the cluster, you can use the load balancer's IP address and port.
@@ -28,6 +29,8 @@ To access the /calc endpoint of the acceleration-calc microservice from outside 
 helm install myapp -f values.yaml
 
 kubectl get deployment
+
+kubectl get services
 
 kubectl logs myapp-acceleration-calc-xxxxx
 
