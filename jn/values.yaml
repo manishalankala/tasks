@@ -1,0 +1,19 @@
+# values.yaml
+
+acceleration-calc:
+  replicas: 2
+  service:
+    type: LoadBalancer
+    port: 8080
+    targetPort: 8080
+
+velocity-calc:
+  replicas: 2
+  service:
+    type: LoadBalancer
+    port: 8080
+    targetPort: 8080
+
+
+
+
