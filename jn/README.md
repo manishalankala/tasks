@@ -29,6 +29,10 @@ helm install my-chart --name my-release --namespace my-namespace
 
 To access the /calc endpoint of the acceleration-calc microservice from outside the cluster, you can use the load balancer's IP address and port.
 
+Edit the templates/deployment.yaml and templates/service.yaml files to specify the desired configuration for the deployment and service, respectively.
+
+To make the /calc endpoint of the acceleration-calc microservice available outside the cluster, you can create a Kubernetes ingress resource and specify the path and backend service in the templates/ingress.yaml file.
+
 helm install myapp -f values.yaml
 
 kubectl get deployment
