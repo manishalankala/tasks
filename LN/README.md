@@ -5,8 +5,15 @@
 
 
 
+
+
+
 Reference :
+
 https://github.com/bridgecrewio/checkov-action
+
 https://github.com/trufflesecurity/trufflehog
+
 https://github.com/snyk/actions
+
 https://github.com/veracode
