@@ -19,3 +19,7 @@ https://github.com/snyk/actions
 https://github.com/veracode
 
 https://github.com/aquasecurity/trivy-action
+
+https://github.com/marketplace/actions/java-maven-release
+
+https://github.com/qcastel/github-actions-maven-release
