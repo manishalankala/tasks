@@ -24,3 +24,5 @@ https://github.com/aquasecurity/trivy-action
 https://github.com/marketplace/actions/java-maven-release
 
 https://github.com/qcastel/github-actions-maven-release
+
+https://docs.aws.amazon.com/whitepapers/latest/cost-optimization-leveraging-ec2-spot-instances/when-to-use-spot-instances.html
