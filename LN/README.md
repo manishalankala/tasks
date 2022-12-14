@@ -17,3 +17,5 @@ https://github.com/trufflesecurity/trufflehog
 https://github.com/snyk/actions
 
 https://github.com/veracode
+
+https://github.com/aquasecurity/trivy-action
