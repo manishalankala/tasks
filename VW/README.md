@@ -59,11 +59,5 @@ Green application online, blue application online, traffic goes to blue
 Green application down, blue application online, traffic goes to blue
 
 
-## References :
 
-Hub & Spoke Model
-
-https://github.com/manishalankala/terraform/blob/master/Model9/model9.png
-
-https://github.com/manishalankala/terraform/blob/master/Model7/terraform/Hub%26Spoke_model_with_site_to_site_vpn.md
 
